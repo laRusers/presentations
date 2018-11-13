@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Introduction to R Markdown</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Sep Dadsetan, Ph.D." />
+    <meta name="date" content="2018-11-12" />
+    <link rel="stylesheet" href="assets/css/styles.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introduction to R Markdown
+### Sep Dadsetan, Ph.D.
+### 2018-11-12
+
+---
+
+
+
+
+# `system('whoami')`
+
+--
+
+### Education/Work
+
+- 2003: B.S. - Genetics - UC Davis
+- 2009: Ph.D. - Molecular Physiology - UC Davis
+- 2011: Postdoc - Genentech
+- Current: Clinical Analytics Manager - Syapse
+
+--
+
+### Programming
+
+- 2000: Web - HTML/early CSS
+- 2002: Python
+- Grad School: 😴
+- 2011: Javascript, Python
+- 2015: R
+
+???
+
+- Special thanks to the LA East RUG organizers (Malcom, Zhi, Emil, George) for injecting lots of eneRgy into the local R community.
+
+- Up until recently I've only been a quiet consumer of the awesome content this community produces (both online and in person). 
+
+- I hope to contribute more and this presentation is my first step in that direction. I hope you find it helpful.
+
+---
+
+# What is Markdown
+
+--
+
+- Created in 2004 by [John Gruber](https://daringfireball.net/)
+
+--
+
+- It's a lightweight markup language to add formatting elements to plaintext
+
+--
+
+- Example time!
+
+---
+
+# What is R Markdown
+
+--
+
+- First introduced as part of the `knitr` package in 2012 by [Yihui Xie](https://yihui.name/)
+    - dynamic report generation
+
+--
+
+- Leverages [Pandoc](http://pandoc.org/) by [John MacFarlane](https://johnmacfarlane.net/) 
+    - "swiss army knife" document conversion.
+
+--
+
+- As of 2014, lives as it's own package `rmarkdown`
+    - knitr executes the code and renders to Markdown
+    - Pandoc then renders the markdown to the desired format
+
+--
+
+- [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+???
+
+- Markdown's simplicity made it very popular, but it was still missing some features. [John MacFarlane](https://johnmacfarlane.net/) created [Pandoc](http://pandoc.org/) to enhance and convert markdown documents to a large variety of outputs and we have lift-off!
+
+- Today, the package is it's own (est. 2014), thanks to Yihui and the team at RStudio, and makes use of knitr and Pandoc with:
+    - knitr executing the code and rendering to Markdown
+    - Pandoc rendering the output to the desired format
+
+---
+
+# What can R Markdown do?
+
+- Here are the list of things it can do:
+
+--
+
+    - Compile a single R Markdown document to a report in different formats, such as PDF, HTML, or Word.
+--
+
+    - Create notebooks in which you can directly run code chunks interactively.
+--
+
+    - Make slides for presentations (HTML5, LaTeX Beamer, or PowerPoint).
+--
+
+    - Produce dashboards with flexible, interactive, and attractive layouts.
+--
+
+    - Build interactive applications based on Shiny.
+--
+
+    - Write journal articles.
+--
+
+    - Author books of multiple chapters.
+--
+
+    - Generate websites and blogs.
+
+---
+
+class: inverse
+background-image: url("https://media.giphy.com/media/yyvSeRGVj4C64/giphy.gif")
+background-size: cover
+
+---
+
+# R Markdown Examples
+
+--
+
+- Compile a single R Markdown document to a report in different formats, such as PDF, HTML, or Word.
+
+--
+
+- Make slides for presentations (HTML5, LaTeX Beamer, or PowerPoint).
+
+--
+
+- [Produce dashboards with flexible, interactive, and attractive layouts](https://rmarkdown.rstudio.com/flexdashboard/examples.html)
+
+--
+
+- Generate websites and blogs!
+
+---
+
+# Setting up an R Blog 
+
+--
+
+1. `install.packages('blogdown')`
+
+2. In RStudio, File -&gt; New Project
+
+3. Select "Website using blogdown"
+
+4. Provide your parameters and create your project!
+
+--
+
+### Tips &amp; Resources
+
+- start simple and focus on content
+
+- once that's working, you can play with [themes](https://themes.gohugo.io/)!
+
+- [blogdown: Creating Websites with R Markdown](https://bookdown.org/yihui/blogdown/)
+
+- [helpful slides from Yihui](https://slides.yihui.name/2017-rstudio-webinar-blogdown-Yihui-Xie.html)
+
+---
+
+## How do I publish?
+
+--
+
+- There are lots of ways and many different instructions on that.
+- What's worked for me was to use [Github](https://www.github.com) and a service called [Netlify](https://www.netlify.com/)
+
+--
+
+### ...the basics
+
+1. Setup your project with git and Github
+2. Create a free Netlify account and connect it to the Github repo you published to
+3. Netlify will use Hugo to render your website
+4. Commits to your github repo will now trigger Netlify to build and update your site automatically!
+
+.center[
+
+# 🙌🏻
+
+]
+
+---
+
+### What about a domain name?
+
+--
+
+- If you don't have a domain name, save yourself the headache and buy one on netlify.
+
+--
+
+- If you already have a domain...may god be with you. 😜
+
+--
+
+    - [Netlify has some decent documentation](https://www.netlify.com/docs/custom-domains/)
+    
+    - You can reach out to me on the [LAERUG Slack](https://laerug.slack.com) as well and I'm happy to assist.
+
+---
+
+# Where can you find me?
+
+- Twitter: [@phdjsep](https://twitter.com/phdjsep)
+
+- Linkedin: [sepdadsetan](https://linkedin.com/in/sepdadsetan/)
+
+- Website: [phdjsep.com](https://www.phdjsep.com)
+
+???
+
+Only recently beginning to engage in R community thanks to the wonderfully welcoming people here.
+
+---
+
+.center[
+
+# Thanks! 👋🏻
+
+]
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

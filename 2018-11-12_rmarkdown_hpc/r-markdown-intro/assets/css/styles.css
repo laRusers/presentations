@@ -1,0 +1,48 @@
+/* Styling for RMarkdown presentation to LAERUG on Nov 12, 2018 */
+
+@import url('https://fonts.googleapis.com/css?family=Merriweather|Open+Sans');
+
+/* Global colors and formatting */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', serif;
+}
+
+ul, li, p, h1, h2, h3, h4, h5, h6 {
+    color: #FEFEFE;
+}
+
+a {
+    color: #4b8b8b;
+}
+
+.remark-slide-content {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #2A2A2A;
+}
+
+.remark-slide-number {
+    color: #FEFEFE;
+}
+
+.remark-notes p,
+.remark-notes-preview p {
+    color: #555;
+    font-size: 24px;
+}
+
+.remark-notes ul li,
+.remark-notes-preview ul li {
+    color: #555;
+}
+
+/* Title Slide */
+
+.title-slide h1 {
+    font-size: 50px;
+}
+
+.title-slide h3 {
+    font-weight: 100;
+    margin: 10px 10px;
+}

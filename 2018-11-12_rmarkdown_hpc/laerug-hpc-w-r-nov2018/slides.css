@@ -1,0 +1,54 @@
+p {
+  text-align: left;
+  font-size: 85% !important;
+}
+
+.reveal blockquote {
+  width: 90%;  
+}
+
+.reveal section img {
+  border: 2px rgba(0, 0, 0, .5);
+}
+
+/* Source code */
+
+.reveal pre code {
+  max-height: 600px;
+}
+
+code.sourceCode {
+  font-size: 85% !important;
+}
+
+code {
+  color: #34495E;
+}
+
+/* Links */
+.reveal a, .reveal a:visited {
+  color: #186865;
+}
+
+.reveal a:hover {
+  color: #182c68;
+}
+
+/* Headers */
+.reveal h1 {
+  font-weight: bold;
+}
+
+.reveal h2, .reveal h3 {
+  color: #21908CFF;
+  font-weight: bold;
+}
+
+.reveal strong, .reveal b {
+  color:  #440154FF;
+  font-weight: bolder;
+}
+
+img-std {
+  width: 600px;
+}

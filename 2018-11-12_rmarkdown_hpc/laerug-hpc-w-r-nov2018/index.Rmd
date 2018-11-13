@@ -1,0 +1,708 @@
+---
+title: "A brief introduction to using R for high-performance computing"
+author: "George G. Vega Yon<br><a href=\"https://ggvy.cl\" target=\"_blank\" style=\"color: black;\">ggvy.cl</a><br>USC Integrative Methods of Analysis for Genetic Epidemiology (IMAGE)<br>Department of Preventive Medicine"
+date: "November 12, 2018"
+output:
+  revealjs::revealjs_presentation:
+    self_contained: true
+    transition: fade
+    theme: simple
+    reveal_options:
+      controls: false
+      slideNumber: true
+      margin: 0.05
+      width: 1024
+      height: 780
+    css: "slides.css"
+    slide_level: 2
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, fig.width=6,
+  fig.align = "center"
+  )
+```
+
+
+## Agenda
+
+1.  High-Performance Computing: An overview
+    
+2.  Parallel computing in R
+    
+3.  Extended examples
+
+
+## High-Performance Computing: An overview
+
+Loosely, from R's perspective, we can think of HPC in terms of two, maybe three things:
+
+1.  Big data: How to work with data that doesn't fit your computer
+
+2.  Parallel computing: How to take advantage of multiple core systems
+
+3.  Compiled code: Write your own low-level code (if R doesn't has it yet...)
+
+(Checkout [CRAN Task View on HPC](https://cran.r-project.org/web/views/HighPerformanceComputing.html))
+
+
+## Big Data
+
+*   Buy a bigger computer/RAM memory (not the best solution!)
+    
+*   Use out-of-memory storage, i.e., don't load all your data in the RAM. e.g.
+    The [bigmemory](https://CRAN.R-project.org/package=bigmemory),
+    [data.table](https://CRAN.R-project.org/package=data.table),
+    [HadoopStreaming](https://CRAN.R-project.org/package=HadoopStreaming) R packages
+    
+*   Efficient algorithms for big data, e.g.: [biglm](https://cran.r-project.org/package=biglm),
+    [biglasso](https://cran.r-project.org/package=biglasso)
+
+*   Store it more efficiently, e.g.: Sparse Matrices (take a look at the `dgCMatrix` objects
+    from the [Matrix](https://CRAN.R-project.org/package=Matrix) R package)
+
+## Parallel computing
+
+```{r, echo=FALSE, fig.cap="Flynn's Classical Taxonomy ([Blaise Barney, **Introduction to Parallel Computing**, Lawrence Livermore National Laboratory](https://computing.llnl.gov/tutorials/parallel_comp/))", fig.align='center'}
+knitr::include_graphics("fig/flynnsTaxonomy.gif")
+```
+
+We will be focusing on the **S**ingle **I**nstruction stream **M**ultiple **D**ata stream
+
+## Parallel computing
+
+### Serial vs Parallel
+
+<p style="text-align:center;">
+<img src="fig/serialProblem.gif" style="width:45%;">
+<img src="fig/parallelProblem.gif" style="width:45%;">
+source: [Blaise Barney, **Introduction to Parallel Computing**, Lawrence Livermore National Laboratory](https://computing.llnl.gov/tutorials/parallel_comp/)
+</p>
+
+## Parallel computing
+
+```{r nodes-network}
+knitr::include_graphics("fig/nodesNetwork.gif")
+```
+
+source: [Blaise Barney, **Introduction to Parallel Computing**, Lawrence Livermore National Laboratory](https://computing.llnl.gov/tutorials/parallel_comp/)
+
+
+## Some vocabulary for HPC
+
+In raw terms
+
+*   Supercomputer: A **single** big machine with thousands of cores/gpus.
+
+*   High Performance Computing (HPC): **Multiple** machines within
+    a **single** network.
+    
+*   High Throughput Computing (HTC): **Multiple** machines across **multiple**
+    networks.
+    
+You may not have access to a supercomputer, but certainly HPC/HTC clusters are
+more accessible these days, e.g. AWS provides a service to create HPC clusters
+at a low cost (allegedly, since nobody understands how pricing works)
+
+## GPU vs CPU
+
+```{r gpu-cpu, echo=FALSE, fig.cap="[NVIDIA Blog](http://www.nvidia.com/object/what-is-gpu-computing.html)", fig.align='center'}
+knitr::include_graphics("fig/cpuvsgpu.jpg")
+nnodes <- 4L
+```
+
+*   Why use OpenMP if GPU is _suited to compute-intensive operations_? Well, mostly because
+    OpenMP is **VERY** easy to implement (easier than CUDA, which is the easiest way to use GPU).
+
+
+## {data-background=#515A5A}
+
+<text style="color:white;">Let's think before we start...</text>
+
+![](https://media.giphy.com/media/Dwclsfe6Gb91m/giphy.gif){style="width:500px"}
+
+<text style="color:white;">When is it a good idea to go HPC?</text>
+
+## When is it a good idea?
+
+```{r good-idea, echo=FALSE, fig.cap="Ask yourself these questions before jumping into HPC!", fig.align='center', out.width="85%"}
+knitr::include_graphics("fig/when_to_parallel.svg")
+```
+
+## Parallel computing in R
+
+While there are several alternatives (just take a look at the
+[High-Performance Computing Task View](https://cran.r-project.org/web/views/HighPerformanceComputing.html)),
+we'll focus on the following R-packages for **explicit parallelism**:
+
+*   [**parallel**](https://cran.r-project.org/package=parallel): R package that provides '[s]upport for parallel computation,
+    including random-number generation'.
+
+*   [**future**](https://cran.r-project.org/package=future): '[A] lightweight and
+    unified Future API for sequential and parallel processing of R
+    expression via futures.'
+    
+*   [**Rcpp**](https://cran.r-project.org/package=Rcpp) + [OpenMP](https://www.openmp.org):
+    [Rcpp](https://cran.r-project.org/package=Rcpp) is an R package for integrating
+    R with C++, and OpenMP is a library for high-level parallelism for C/C++ and
+    FORTRAN.
+    
+---
+
+Others but not used here
+
+*   [**foreach**](https://cran.r-project.org/package=foreach) for iterating through lists in parallel.
+
+*   [**Rmpi**](https://cran.r-project.org/package=Rmpi) for creating MPI clusters.
+
+And tools for implicit parallelism (out-of-the-box tools that allow the
+programmer not to worry about parallelization):
+
+*   [**gpuR**](https://cran.r-project.org/package=gpuR) for Matrix manipulation using
+GPU
+
+*   [**tensorflow**](https://cran.r-project.org/package=tensorflow) an R interface to
+[TensorFlow](https://www.tensorflow.org/).
+
+A ton of other type of resources, notably the tools for working with 
+batch schedulers such as [Slurm](http://slurm.schedmd.com), and
+[HTCondor](https://research.cs.wisc.edu/htcondor/).
+
+## {data-background=#515A5A}
+
+<p style="color:white;text-align:center;">
+![](https://media.giphy.com/media/l4FGwBxQ8VjtzNcv6/giphy.gif){style="width:400px;"}<br>
+U ready for speed?!?!?!
+</p>
+
+## Parallel workflow
+
+(Usually) We do the following:
+
+1.  Create a `PSOCK/FORK` (or other) cluster using `makePSOCKCluster`/`makeForkCluster`
+    (or `makeCluster`)
+    
+2.  Copy/prepare each R session (if you are using a `PSOCK` cluster):
+
+    a.  Copy objects with `clusterExport`
+
+    b.  Pass expressions with `clusterEvalQ`
+
+    c.  Set a seed
+
+3.  Do your call: `parApply`, `parLapply`, etc. 
+
+4.  Stop the cluster with `clusterStop`
+
+
+## Types of clusters: PSOCK
+
+-   Can be created with `makePSOCKCluster`
+
+-   Creates brand new R Sessions (so nothing is inherited from the master), e.g.
+    
+    ```r
+    # This creates a cluster with 4 R sessions
+    cl <- makePSOCKCluster(4)
+    ```
+
+-   Child sessions are connected to the master session via Socket connections
+
+-   Can be created outside of the current computer, i.e. across multiple computers!
+
+## Types of clusters: Fork
+
+-   Fork Cluster `makeForkCluster`:
+
+-   Uses OS [Forking](https://en.wikipedia.org/wiki/Fork_(system_call)),
+
+-   Copies the current R session locally (so everything is inherited from
+    the master up to that point).
+    
+-   Data is only duplicated if it is altered (need to double check when this happens!)
+
+-   Not available on Windows.
+
+Other `makeCluster`: passed to [**snow**](https://cran.r-project.org/package=snow)
+(Simple Network of Workstations)
+
+
+## Ex 1: Parallel RNG with `makePSOCKCluster`
+
+
+```{r parallel-ex-psock, echo=TRUE}
+# 1. CREATING A CLUSTER
+library(parallel)
+nnodes <- 4L
+cl     <- makePSOCKcluster(nnodes)    
+
+# 2. PREPARING THE CLUSTER
+clusterSetRNGStream(cl, 123) # Equivalent to `set.seed(123)`
+
+# 3. DO YOUR CALL
+ans <- parSapply(cl, 1:nnodes, function(x) runif(1e3))
+(ans0 <- var(ans))
+```
+
+----
+
+Making sure is reproducible
+
+```{r parallel-ex-psock-cont, echo=TRUE}
+# I want to get the same!
+clusterSetRNGStream(cl, 123)
+ans1 <- var(parSapply(cl, 1:nnodes, function(x) runif(1e3)))
+
+# 4. STOP THE CLUSTER
+stopCluster(cl)
+
+all.equal(ans0, ans1) # All equal!
+```
+
+## Ex 2: Parallel RNG with `makeForkCluster`
+
+In the case of `makeForkCluster`
+
+```{r parallel-ex-fork, echo=TRUE, eval = TRUE}
+# 1. CREATING A CLUSTER
+library(parallel)
+
+# The fork cluster will copy the -nsims- object
+nsims  <- 1e3
+nnodes <- 4L
+cl     <- makeForkCluster(nnodes)    
+
+# 2. PREPARING THE CLUSTER
+clusterSetRNGStream(cl, 123)
+
+# 3. DO YOUR CALL
+ans <- do.call(cbind, parLapply(cl, 1:nnodes, function(x) {
+  runif(nsims) # Look! we use the nsims object!
+               # This would have fail in makePSOCKCluster
+               # if we didn't copy -nsims- first.
+  }))
+
+(ans0 <- var(ans))
+```
+
+---
+
+Again, we want to make sure this is reproducible
+
+```{r parallel-ex-fork-cont, echo=TRUE}
+# Same sequence with same seed
+clusterSetRNGStream(cl, 123)
+ans1 <- var(do.call(cbind, parLapply(cl, 1:nnodes, function(x) runif(nsims))))
+
+ans0 - ans1 # A matrix of zeros
+
+# 4. STOP THE CLUSTER
+stopCluster(cl)
+```
+
+## {data-background=#515A5A}
+
+```{r what-did-you-said, out.width="80%"}
+knitr::include_graphics("fig/what-did-you-said.gif")
+```
+
+<text style="color:white;">Well, if you are a Mac-OS/Linux user, there's a simpler way of doing this...</text>
+
+
+## Ex 3: Parallel RNG with `mclapply` (Forking on the fly)
+
+In the case of `mclapply`, the forking (cluster creation) is done on the fly!
+
+```{r parallel-ex-mclapply, echo=TRUE, eval = TRUE}
+# 1. CREATING A CLUSTER
+library(parallel)
+
+# The fork cluster will copy the -nsims- object
+nsims  <- 1e3
+nnodes <- 4L
+# cl     <- makeForkCluster(nnodes) # mclapply does it on the fly
+
+# 2. PREPARING THE CLUSTER
+set.seed(123) 
+
+# 3. DO YOUR CALL
+ans <- do.call(cbind, mclapply(1:nnodes, function(x) runif(nsims)))
+
+(ans0 <- var(ans))
+```
+
+---
+
+Once more, we want to make sure this is reproducible
+
+```{r parallel-ex-mclapply-cont, echo=TRUE}
+# Same sequence with same seed
+set.seed(123) 
+ans1 <- var(do.call(cbind, mclapply(1:nnodes, function(x) runif(nsims))))
+
+ans0 - ans1 # A matrix of zeros
+
+# 4. STOP THE CLUSTER
+# stopCluster(cl) no need of doing this anymore
+```
+
+## {data-background=#515A5A}
+
+<p style="text-align:center;color:white;font-size:200%;">
+RcppArmadillo + OpenMP<br>=<br><img src="https://media.giphy.com/media/WUq1cg9K7uzHa/giphy.gif" style="width:400px">
+</p>
+
+## RcppArmadillo and OpenMP
+
+*   Friendlier than [**RcppParallel**](http://rcppcore.github.io/RcppParallel/)...
+    at least for 'I-use-Rcpp-but-don't-actually-know-much-about-C++' users (like myself!).
+
+*   Must run only 'Thread-safe' calls, so calling R within parallel blocks can cause
+    problems (almost all the time).
+    
+*   Use `arma` objects, e.g. `arma::mat`, `arma::vec`, etc. Or, if you are used to them
+    `std::vector` objects as these are thread safe.
+
+---
+
+*   Pseudo Random Number Generation is not very straight forward... But C++11 has
+    a [nice set of functions](http://en.cppreference.com/w/cpp/numeric/random) that can be used together with OpenMP
+
+*   Need to think about how processors work, cache memory, etc. Otherwise you could
+    get into trouble... if your code is slower when run in parallel, then you probably
+    are facing [false sharing](https://software.intel.com/en-us/articles/avoiding-and-identifying-false-sharing-among-threads)
+    
+*   If R crashes... try running R with a debugger (see
+    [Section 4.3 in Writing R extensions](https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Checking-memory-access)):
+    
+    ```shell
+    ~$ R --debugger=valgrind
+    ```
+
+## RcppArmadillo and OpenMP workflow
+
+1.  Tell Rcpp that you need to include that in the compiler:
+    
+    ```cpp
+    #include <omp.h>
+    // [[Rcpp::plugins(openmp)]]
+    ```
+
+2.  Within your function, set the number of cores, e.g
+
+    ```cpp
+    // Setting the cores
+    omp_set_num_threads(cores);
+    ```
+
+## RcppArmadillo and OpenMP workflow
+
+3.  Tell the compiler that you'll be running a block in parallel with OpenMP
+    
+    ```cpp
+    #pragma omp [directives] [options]
+    {
+      ...your neat parallel code...
+    }
+    ```
+    
+    You'll need to specify how OMP should handle the data:
+    
+    *   `shared`: Default, all threads access the same copy.
+    *   `private`: Each thread has its own copy, uninitialized.
+    *   `firstprivate` Each thread has its own copy, initialized.
+    *   `lastprivate` Each thread has its own copy. The last value used is returned.
+    
+    
+    Setting `default(none)` is a good practice.
+    
+3.  Compile!
+
+
+## Ex 5: RcppArmadillo + OpenMP
+
+Our own version of the `dist` function... but in parallel!
+
+```{Rcpp dist-code, cache=TRUE, echo=TRUE}
+#include <omp.h>
+#include <RcppArmadillo.h>
+
+// [[Rcpp::depends(RcppArmadillo)]]
+// [[Rcpp::plugins(openmp)]]
+
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+arma::mat dist_par(const arma::mat & X, int cores = 1) {
+  
+  // Some constants
+  int N = (int) X.n_rows;
+  int K = (int) X.n_cols;
+  
+  // Output
+  arma::mat D(N,N);
+  D.zeros(); // Filling with zeros
+  
+  // Setting the cores
+  omp_set_num_threads(cores);
+  
+#pragma omp parallel for shared(D, N, K, X) default(none)
+  for (int i=0; i<N; ++i)
+    for (int j=0; j<i; ++j) {
+      for (int k=0; k<K; k++) 
+        D.at(i,j) += pow(X.at(i,k) - X.at(j,k), 2.0);
+      
+      // Computing square root
+      D.at(i,j) = sqrt(D.at(i,j));
+      D.at(j,i) = D.at(i,j);
+    }
+      
+  
+  // My nice distance matrix
+  return D;
+}
+```
+
+---
+
+```{r dist-dat, echo=TRUE, cache=TRUE}
+# Simulating data
+set.seed(1231)
+K <- 5000
+n <- 500
+x <- matrix(rnorm(n*K), ncol=K)
+
+# Are we getting the same?
+table(as.matrix(dist(x)) - dist_par(x, 4)) # Only zeros
+```
+
+---
+
+```{r dist-benchmark, echo=TRUE, cache=TRUE}
+# Benchmarking!
+rbenchmark::benchmark(
+  dist(x),                 # stats::dist
+  dist_par(x, cores = 1),  # 1 core
+  dist_par(x, cores = 4),  # 2 cores
+  dist_par(x, cores = 8), #  4 cores
+  replications = 1, order="elapsed"
+)[,1:4]
+```
+
+## Ex 6: The future
+
+*   [**future**](https://cran.r-project.org/package=future) is an R package that
+    was designed "to provide a very simple and uniform way of evaluating R
+    expressions asynchronously using various resources available to the user."
+    
+*   `future` class objects are either resolved or unresolved.
+
+*   If queried, **Resolved** values are return immediately, and **Unresolved** values
+    will block the process (i.e. wait) until it is resolved.
+    
+*   Futures can be parallel/serial, in a single (local or remote) computer, or
+    a cluster of them.
+    
+Let's see a brief example
+
+## Ex 6: The future (cont'd)
+
+```{r future, echo=TRUE, collapse=TRUE, cache=TRUE}
+library(future)
+plan(multicore)
+
+# We are creating a global variable
+a <- 2
+
+# Creating the futures has only the overhead (setup) time
+system.time({
+  x1 %<-% {Sys.sleep(3);a^2}
+  x2 %<-% {Sys.sleep(3);a^3}
+})
+
+# Let's just wait 5 seconds to make sure all the cores have returned
+Sys.sleep(3)
+system.time({
+  print(x1)
+  print(x2)
+})
+```
+
+
+## {style="text-align:center!important;"}
+
+```{r thanks, out.width="300px"}
+knitr::include_graphics("fig/speed.gif")
+```
+
+### Thanks!
+
+<p style="text-align:center!important;">
+`r icon::fa("github")`  [gvegayon](https://github.com/gvegayon/) <br>
+`r icon::fa("twitter")`  [\@gvegayon](https://twitter.com/gvegayon) <br>
+`r icon::fa("home")`  [ggvy.cl](https://ggvy.cl)<br><br>
+<text style="color:gray;font-size:80%">Presentation created with [revealjs](https:cran.r-project.org/package=revealjs)</text>
+</p>
+
+## See also
+
+*   [Package parallel](https://stat.ethz.ch/R-manual/R-devel/library/parallel/doc/parallel.pdf) 
+*   [Using the iterators package](https://cran.r-project.org/web/packages/iterators/vignettes/iterators.pdf)
+*   [Using the foreach package](https://cran.r-project.org/web/packages/foreach/vignettes/foreach.pdf)
+*   [32 OpenMP traps for C++ developers](https://software.intel.com/en-us/articles/32-openmp-traps-for-c-developers)
+*   [The OpenMP API specification for parallel programming](http://www.openmp.org/)
+*   ['openmp' tag in Rcpp gallery](gallery.rcpp.org/tags/openmp/)
+*   [OpenMP tutorials and articles](http://www.openmp.org/resources/tutorials-articles/)
+
+For more, checkout the [CRAN Task View on HPC](https://cran.r-project.org/web/views/HighPerformanceComputing.html){target="_blank"}
+
+## Session info
+
+```{r session, echo=FALSE}
+sessionInfo()
+```
+
+
+## Bonus track 1: Simulating $\pi$
+
+
+*   We know that $\pi = \frac{A}{r^2}$. We approximate it by randomly adding
+    points $x$ to a square of size 2 centered at the origin.
+
+*   So, we approximate $\pi$ as $\Pr\{\|x\| \leq 1\}\times 2^2$
+
+```{r, echo=FALSE, dev='jpeg', dev.args=list(quality=100), fig.width=6, fig.height=6, out.width='300px', out.height='300px'}
+set.seed(1231)
+p    <- matrix(runif(5e3*2, -1, 1), ncol=2)
+pcol <- ifelse(sqrt(rowSums(p^2)) <= 1, adjustcolor("blue", .7), adjustcolor("gray", .7))
+plot(p, col=pcol, pch=18)
+```
+
+---
+
+The R code to do this
+
+```{r simpi, echo=TRUE}
+pisim <- function(i, nsim) {  # Notice we don't use the -i-
+  # Random points
+  ans  <- matrix(runif(nsim*2), ncol=2)
+  
+  # Distance to the origin
+  ans  <- sqrt(rowSums(ans^2))
+  
+  # Estimated pi
+  (sum(ans <= 1)*4)/nsim
+}
+```
+
+
+
+## Bonus track 1: Simulating $\pi$ (cont'd)
+
+```{r parallel-ex2, echo=TRUE, cache=TRUE}
+
+# Setup
+cl <- makePSOCKcluster(4L)
+clusterSetRNGStream(cl, 123)
+
+# Number of simulations we want each time to run
+nsim <- 1e5
+
+# We need to make -nsim- and -pisim- available to the
+# cluster
+clusterExport(cl, c("nsim", "pisim"))
+
+# Benchmarking: parSapply and sapply will run this simulation
+# a hundred times each, so at the end we have 1e5*100 points
+# to approximate pi
+rbenchmark::benchmark(
+  parallel = parSapply(cl, 1:100, pisim, nsim=nsim),
+  serial   = sapply(1:100, pisim, nsim=nsim), replications = 1
+)[,1:4]
+
+```
+
+---
+
+```{r printing-and-stop, cache=TRUE}
+ans_par <- parSapply(cl, 1:100, pisim, nsim=nsim)
+ans_ser <- sapply(1:100, pisim, nsim=nsim)
+stopCluster(cl)
+```
+
+```{r, echo=FALSE}
+c(par = mean(ans_par), ser = mean(ans_ser), R = pi)
+```
+
+## Bonus track 2: HPC with Slurm
+
+*   Suppose that we would like to maximize/minimize a function using an stochastic
+    optimization algorithm, namely, the [**Artificial Bee Colony algorithm**](http://mf.erciyes.edu.tr/abc/index.htm){target="_blank"}
+    
+*   The following R script ([01-slurm-abcoptim.R](examples/01-slurm-abcoptim.R){target="_blank"}) was designed to work with Slurm
+    (it requires the R package ABCoptim [@ABCoptim])
+    
+```r
+# Include this to tell where everything will be living at
+.libPaths("~/R/x86_64-pc-linux-gnu-library/3.4/")
+
+# Default CRAN mirror from where to download R packages
+options(repos =c(CRAN="https://cloud.r-project.org/"))
+
+# You need to have the ABCoptim R package
+library(ABCoptim)
+
+fun <- function(x) {
+  -cos(x[1])*cos(x[2])*exp(-((x[1] - pi)^2 + (x[2] - pi)^2))
+}
+
+ans <- abc_optim(rep(0,2), fun, lb=-10, ub=10, criter=50)
+
+saveRDS(
+   ans,
+   file = paste0(
+      "~/hpc-with-r/examples/01-slurm-abcoptim-",
+      Sys.getenv("SLURM_JOB_ID"),                 # SLURM ENV VAR
+      "-",
+      Sys.getenv("SLURM_ARRAY_TASK_ID"),          # SLURM ENV VAR
+      ".rds"
+))
+```
+
+*   Notice that we are using `SLURM_JOB_ID`, and `SLURM_ARRAY_TASK_ID` to save
+    our results (both environment variables created by slurm)
+
+---
+
+*   To run the previous R script, we can use the following bash file ([01-slurm-abcoptim.sh](examples/01-slurm-abcoptim.sh){target="_blank"})
+    
+    ```bash
+    #!/bin/bash 
+    #SBATCH --tasks=1
+    #SBATCH --array=1-3
+    #SBATCH --job-name=01-slurm-abcoptim
+    #SBATCH --output=01-slurm-abcoptim-%A_%a.out
+    
+    source /usr/usc/R/3.4.0/setup.sh
+    Rscript --vanilla ~/hpc-with-r/examples/01-slurm-abcoptim.R 
+    ```
+
+*   Here we are taking advantage of the Slurm Arrays, so we are running the same
+    R-script in 3 instances (`--array=1-3`)
+    
+*   To run the job we just need to type
+    
+    ```bash
+    $ sbatch 01-slurm-abcoptim.sh
+    ```
+
+*   Make sure you modify the file paths so that it matches your files!
+    
+<div align="center">
+<p style="font-size:40px">Now you try it!</p>
+</div>
+
+
