@@ -1,0 +1,177 @@
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,500,500i,700,700i);
+@import url(//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack-subset.css);
+
+body {
+  font-family: 'Fira Sans','Droid Serif', 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
+}
+
+a, a > code {
+  color: #EC99C6;
+  text-decoration: none;
+}
+
+strong {
+  color: #E69F00;
+}
+
+em {
+  color: #56B4E9;  
+  font-style: normal;
+  font-weight: bold;
+}
+
+del {
+  color: #E5E5E5;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.remark-code {
+  font-family: 'Hack', 'Lucida Console', Monaco, monospace;
+  font-size: 100%;
+}
+
+.remark-inline-code {
+  font-family: 'Fira Sans', 'Lucida Console', Monaco, monospace;
+  font-weight: 400;
+  font-size: 100%;
+}
+
+.large { font-size: 130% }
+.medium { font-size: 115% }
+.small { font-size: 70% }
+
+.remark-slide-content {
+  color: #474747;
+  font-weight: 300;
+  padding: 1em 2em 1em 2em
+}
+
+.remark-slide-content h1{
+  color: #56B4E9;
+}
+
+.remark-slide-content h2{
+  font-weight: 500;
+}
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+.title-slide {
+  background-size: cover;
+  color: #EDEEEF;
+  vertical-align: bottom;
+}
+
+.title-slide h1  {
+  color: #E69F00;
+  font-size: 72px;
+  text-shadow: none;
+  text-align: left;
+  vertical-align: bottom;
+}
+.title-slide h2  {
+  color: #56B4E9;
+  text-shadow: none;
+  font-size: 48px;
+  text-align: left;
+  font-weight: bold;
+}
+.title-slide h3  {
+  color: #EDEEEF;
+  text-shadow: none;
+  font-size: 36px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.title-slide h4  {
+  color: #EDEEEF;
+  text-shadow: none;
+  font-size: 24px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.inverse {
+  background-size: cover;
+  background-color: #23373B;
+  color: #EDEEEF;
+  text-shadow: 0 0 20px #333;
+  font-weight: bold;
+}
+
+.inverse-ns {
+  background-size: cover;
+  background-color: #23373B;
+  color: #EDEEEF;
+  text-shadow: none;
+  font-weight: bold;
+}
+
+.takeaways {
+  padding-top: 80px;
+}
+
+.inverse-ns h1 {
+  color: #EDEEEF;
+  font-weight: bold;
+}
+
+.inverse-ns h2, .inverse-ns h3  {
+  color: #EDEEEF;
+  font-weight: 500;
+}
+
+.inverse del {
+  color: #6C7B7F;
+}
+
+.inverse-ns del {
+  color: #6C7B7F;
+}
+
+img {
+  display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+ol {
+  counter-reset: my-counter;
+  list-style: none;
+  padding-left: 40px;
+  font-size: 45px;
+  font-weight: bold;
+  text-align: left;
+}
+ol li {
+  counter-increment: my-counter;
+  padding-left: 40px;
+  position: relative;
+  font-size: 45px;
+  margin: 20px 0;
+  display: block;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+ol li::before {
+  content: counter(my-counter);
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  position: absolute;
+  left: -25px;
+  line-height: 50px;
+  width: 50px;
+  height: 50px;
+  top: 0;
+  background: #56B4E9;
+  border-radius: 50%;
+  text-align: center;
+}
