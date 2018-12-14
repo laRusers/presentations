@@ -1,0 +1,501 @@
+---
+title: "Text Analysis in R"
+subtitle: "Special Christmas Edition"
+author: "Emil Hvitfeldt"
+date: "2018-10-29"
+output:
+  xaringan::moon_reader:
+    css: ["default", "theme.css"]
+    lib_dir: libs
+    nature:
+      beforeInit: "macros.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      titleSlideClass: [center, middle]
+---
+
+```{r include=FALSE}
+library(knitr)
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines) == 1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+library(tidyr)
+``` 
+
+# What is Natural Language Processing (NLP)
+
+Using computers to extract insights and make decision based on human languages.
+
+- Information extraction
+- Machine translation
+- Speech processing
+- Image understanding
+
+???
+
+https://www.ling.upenn.edu/~beatrice/humor/headlines.html
+
+Not Computational linguistics which is using computers to reason about human langauges
+
+---
+
+# Plan of Action
+
+
+## Text mining
+
+We will be doing text mining as exploratory data analysis
+
+## Modeling
+
+Apply some simple models to make decisions only based on text
+
+---
+
+background-image: url("http://3.bp.blogspot.com/-FDjkfNyHOCA/UNNVcB9eBsI/AAAAAAAABp4/fivfG6senDU/s1600/fir-tree1.jpg")
+background-position: 90% 35%
+background-size: 20% 30%
+
+# The Data
+
+## Text mining
+
+The Fir Tree  
+H.C. Andersen  
+21 December 1844  
+EK (**e**ventyr**k**ode / fairly tale code) = 26
+
+Fairly early, one of first works displaying pessimism.
+
+
+???
+
+Types of data
+
+- Strings
+- Document term matrix
+- Corpus
+
+---
+
+# The Data
+
+## Modeling
+
+Movie reviews from [IMDb.com](IMDb.com)
+
+2 Movies
+
+---
+
+.pull-left[
+![](https://m.media-amazon.com/images/M/MV5BMzUxNzkzMzQtYjIxZC00NzU0LThkYTQtZjNhNTljMTA1MDA1L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg)
+]
+
+.pull-right[
+![](https://m.media-amazon.com/images/M/MV5BNWNiNTczNzEtMjQyZC00MjFmLTkzMDMtODk4ZGMyZmE0N2E4XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg)
+]
+
+---
+
+# Finding gold
+
+.medium[
+```{r}
+#devtools::install_github("emilhvitfeldt/hcandersenr")
+library(hcandersenr)
+```
+]
+
+Includes most of H.C. Andersens 157 fairly tales in 5 languages (Danish, German, English, Spanish, French).
+
+--
+
+.medium[
+```{r}
+library(dplyr)
+tree <- hcandersen_en %>%
+  filter(book == "The fir tree") %>%
+  select(text)
+```
+]
+
+---
+
+# The Text
+
+.smallish[
+```{r}
+tree
+```
+]
+
+---
+
+.pull-left[
+```{r}
+library(tidytext)
+
+unnest_tokens(tree, word, text) #<<
+```
+]
+
+.pull-right[
+Observational unit: 
+
+- Document
+- Sentence
+- Word
+- Letter
+]
+
+---
+
+.pull-left[
+```{r}
+library(tidytext)
+
+unnest_tokens(tree, word, text) #<<
+```
+]
+
+.pull-right[
+Observational unit: 
+
+- ~~Document~~
+- ~~Sentence~~
+- **Word**
+- ~~Letter~~
+
+Word tokens are default in `unnest_tokens()`
+]
+
+---
+
+```{r}
+library(tidytext)
+
+unnest_tokens(tree, word, text) %>%
+  count(word, sort = TRUE) #<<
+```
+
+---
+
+```{r, highlight.output=c(4, 5, 7, 8, 9, 10, 11, 12, 13)}
+library(tidytext)
+
+unnest_tokens(tree, word, text) %>%
+  count(word, sort = TRUE) #<<
+```
+
+--
+
+These words don't give us much context
+
+---
+
+# Stop words
+
+Stop words or "non-context" words are words that doens't add much to the text (filler that make sentences work).
+
+```{r, output.lines = 9}
+stop_words$word
+```
+
+---
+
+# Stop words
+
+Stop words or "non-context" words are words that doens't add much to the text (filler that make sentences work).
+
+Don't remove stop words willy nilly!  
+
+Pre-constructed word list might not work in your domain  
+
+Creating your own word list is hard...
+
+???
+
+Lean
+computer
+old
+
+---
+
+```{r}
+unnest_tokens(tree, word, text) %>%
+  inner_join(stop_words, by = "word") %>% #<<
+  count(word, sort = TRUE) %>%
+  top_n(50, n) %>%
+  pull(word)
+```
+
+Look at the words you remove (easy)  
+
+or know you stop word by heart (hard!!!)
+
+---
+
+```{r}
+unnest_tokens(tree, word, text) %>%
+  anti_join(stop_words, by = "word") %>% #<<
+  count(word, sort = TRUE)
+```
+
+---
+
+```{r, eval=FALSE}
+library(ggplot2)
+unnest_tokens(tree, word, text) %>%
+  anti_join(stop_words, by = "word") %>%
+  count(word, sort = TRUE) %>%
+  top_n(10, n) %>%
+  ggplot(aes(reorder(word, n), n)) +
+  geom_col() +
+  coord_flip() +
+  theme_light() +
+  labs(x = "Times",
+       y = "Word",
+       title = "Word frequency in 'The Fur Tree'")
+```
+
+---
+
+```{r echo=FALSE, fig.asp=0.618, fig.width=5, dpi=300, out.width='100%'}
+library(ggplot2)
+unnest_tokens(tree, word, text) %>%
+  anti_join(stop_words, by = "word") %>%
+  count(word, sort = TRUE) %>%
+  top_n(10, n) %>%
+  ggplot(aes(reorder(word, n), n)) +
+  geom_col() +
+  coord_flip() +
+  theme_light() +
+  labs(x = "Times",
+       y = "Word",
+       title = "Word frequency in 'The Fur Tree'")
+```
+
+---
+
+```{r, eval=FALSE}
+unnest_tokens(tree, word, text) %>%
+  mutate(pos = row_number(),
+         place = word == "story") %>%
+  filter(place) %>%
+  ggplot(aes(pos, place)) +
+  geom_point() +
+  theme_light() +
+  labs(x = "Position",
+       y = "",
+       title = "Occurence plot of word 'story'")
+```
+
+---
+
+```{r, echo=FALSE, out.width = '90%', fig.asp=0.618, fig.width=4, dpi=300}
+unnest_tokens(tree, word, text) %>%
+  mutate(pos = row_number(),
+         place = word == "story") %>%
+  filter(place) %>%
+  ggplot(aes(pos, place)) +
+  geom_point() +
+  theme_light() +
+  labs(x = "Position",
+       y = "",
+       title = "Occurence plot of word 'story'")
+```
+
+---
+
+```{r, eval=FALSE}
+unnest_tokens(tree, word, text) %>%
+  mutate(pos = row_number(),
+         place = case_when(word == "story" ~ "story",
+                           word %in% c("tree", "trees") ~ "tree",
+                           word == "mice" ~ "mice",
+                           word == "children" ~ "children",
+                           word == "forest" ~ "forest",
+                           TRUE ~ NA_character_)) %>%
+  drop_na() %>%
+  ggplot(aes(pos, place, color = place)) +
+  geom_point() +
+  theme_light() +
+  guides(color = "none") +
+  labs(x = "Position",
+       y = "Word",
+       title = "Occurence plot of 'The Fur Tree'")
+```
+
+---
+
+```{r, echo=FALSE, out.width = '90%', fig.asp=0.618, fig.width=4, dpi=300}
+unnest_tokens(tree, word, text) %>%
+  mutate(pos = row_number(),
+         place = case_when(word == "story" ~ "story",
+                           word %in% c("tree", "trees") ~ "tree",
+                           word == "mice" ~ "mice",
+                           word == "children" ~ "children",
+                           word == "forest" ~ "forest",
+                           TRUE ~ NA_character_)) %>%
+  drop_na() %>%
+  ggplot(aes(pos, place, color = place)) +
+  geom_jitter(width = 0, height = 0.2) +
+  theme_light() +
+  guides(color = "none") +
+  labs(x = "Position",
+       y = "Word",
+       title = "Occurence plot of 'The Fur Tree'")
+```
+
+---
+
+## Going to the movies
+
+Scraped review (scraping_reviews.Rmd)
+
+```{r, message=FALSE}
+library(readr)
+library(tidyr)
+reviews <- read_csv("review_data.csv") %>%
+  select(movie, rating, review) %>%
+  drop_na()
+```
+
+.smallish[
+```{r, echo=FALSE}
+reviews
+```
+]
+
+---
+
+```{r, out.width = '90%', fig.asp=0.618, fig.width=4, dpi=300}
+ggplot(reviews, aes(as.factor(rating), 1, fill = movie)) +
+  geom_col() +
+  facet_grid(~ movie) +
+  theme_minimal() +
+  labs(x = "Rating",
+       y = "Count") +
+  guides(fill = "none")
+```
+
+---
+
+## tidymodels
+
+```{r}
+library(tidymodels)
+#devtools::install_github("tidymodels/textrecipes")
+library(textrecipes)
+```
+
+`tidymodels` is a "meta-package" for modeling and statistical analysis that share the underlying design philosophy, grammar, and data structures of the tidyverse.
+
+`textrecipes` is an addition to the recipes package providing text processing capabilities (coming to CRAN any day)
+
+---
+
+.medium[
+```{r}
+set.seed(2018)
+
+split <- reviews %>%
+  mutate(good = factor(rating > 5, labels = c("bad", "good"))) %>%
+  select(good, text = review) %>%
+  initial_split(props = 7 / 10)
+
+review_train <- training(split)
+review_test  <- testing(split)
+```
+]
+
+Splitting data into training and testing set
+
+Next we specify a preprocesing step using recipes
+
+---
+
+## What do we measure?
+
+![](https://user-images.githubusercontent.com/6179259/47669547-78c9f180-dbee-11e8-85e8-e01cb4cbe46d.png)
+
+---
+
+.medium[
+```{r, eval=FALSE}
+review_rec <- recipe(good ~ ., data = review_train) %>%
+  step_tokenize(text) %>%
+  step_tokenfilter(text, max_tokens = 500) %>%
+  step_tfidf(text) %>%
+  prep(training = review_train)
+
+review_rec
+```
+]
+
+```{r, echo=FALSE}
+review_rec <- recipe(good ~ ., data = review_train) %>%
+  step_tokenize(text) %>%
+  step_tokenfilter(text, max_tokens = 500) %>%
+  step_tf(text) %>%
+  prep(training = review_train)
+
+review_rec
+```
+
+---
+
+```{r}
+# Processed data
+train_data <- juice(review_rec)
+test_data  <- bake(review_rec, review_test, all_predictors())
+```
+
+```{r}
+train_data
+```
+
+---
+
+```{r}
+review_model <- logistic_reg() %>%
+  set_engine("glm")
+```
+
+```{r, message=FALSE, warning=FALSE}
+review_fit <- review_model %>%
+  fit(good ~ ., data = train_data)
+```
+
+```{r}
+test_results <- review_test %>%
+  select(good) %>%
+  as_tibble() %>%
+  mutate(
+    class = predict_class(review_fit, test_data),
+  )
+
+test_results %>% accuracy(truth = good, estimate = class)
+```
+
+
+(This is not an example of finished classification. The Accuracy is not that good, but the general steps you would follow.)

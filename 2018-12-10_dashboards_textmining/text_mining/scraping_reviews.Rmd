@@ -1,0 +1,106 @@
+# Libraries
+
+```{r}
+library(tidyverse)
+library(rvest)
+library(rlang)
+```
+
+# Gather source for meta data for reviews
+
+Go to 
+
+- https://www.imdb.com/title/tt0319343/reviews?ref_=tt_urv
+- https://www.imdb.com/title/tt0170016/reviews?ref_=tt_urv
+
+and click "load more" intill done.
+
+Open developer tools.
+
+Clock to edit html source. Copy and paste it into new html file. 
+
+# Extract meta data for reviews
+
+```{r}
+extract_review_url <- function(url, name) {
+  read_html(url) %>%
+  html_nodes('div[class="review-container"] a[class="title"]') %>%
+  html_attr('href') %>%
+  str_c("https://www.imdb.com", .) %>%
+  tibble(url = .) %>%
+  mutate(movie = name,
+         id = str_extract(url, "rw\\d{7}"))
+}
+```
+
+meta data tibble
+
+```{r}
+meta <- bind_rows(
+  extract_review_url("2018-11-17_elf_reviews.html", "elf"),
+  extract_review_url("2018-11-17_how-the-grinch-stole-christmas_reviews.html", "grinch")
+)
+```
+
+# Extracting reviews
+
+```{r}
+extract_review <- function(url) {
+  rating <- read_html(url) %>%
+    html_nodes('span[class="rating-other-user-rating"] span') %>%
+    .[1] %>%
+    html_text() %>%
+    ifelse(length(.) == 0, NA_character_, .)
+  
+  title <- read_html(url) %>%
+    html_nodes('a[class="title"]') %>%
+    html_text()
+
+  review <- read_html(url) %>%
+    html_nodes('div[class="text show-more__control"]') %>%
+    html_text()
+  
+  helpful <- read_html(url) %>%
+    html_nodes('div[class="actions text-muted"]') %>%
+    html_text()
+  
+  tibble(rating = rating,
+         title = title,
+         review = review,
+         helpful = helpful)
+}
+```
+
+```{r}
+s_extract_review <- safely(extract_review)
+
+pb <- progress_estimated(nrow(meta))
+
+data <- meta %>%
+  mutate(extract = map(url,  ~{
+      pb$tick()$print()
+      #Sys.sleep(5)
+      s_extract_review(.x)
+    }
+))
+```
+
+check that they all load correctly.
+
+```{r}
+data$extract %>%
+  map_lgl(~ is.null(.x$error)) %>%
+  all()
+```
+
+
+```{r}
+clean_data <- data %>%
+  mutate(extract = map(extract, 'result')) %>%
+  unnest(extract)
+```
+
+```{r}
+write_csv(clean_data, path = "review_data.csv")
+```
+

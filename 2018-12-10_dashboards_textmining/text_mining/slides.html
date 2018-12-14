@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Text Analysis in R</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Emil Hvitfeldt" />
+    <meta name="date" content="2018-10-29" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="theme.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, title-slide
+
+# Text Analysis in R
+## Special Christmas Edition
+### Emil Hvitfeldt
+### 2018-10-29
+
+---
+
+
+
+
+# What is Natural Language Processing (NLP)
+
+Using computers to extract insights and make decision based on human languages.
+
+- Information extraction
+- Machine translation
+- Speech processing
+- Image understanding
+
+???
+
+https://www.ling.upenn.edu/~beatrice/humor/headlines.html
+
+Not Computational linguistics which is using computers to reason about human langauges
+
+---
+
+# Plan of Action
+
+
+## Text mining
+
+We will be doing text mining as exploratory data analysis
+
+## Modeling
+
+Apply some simple models to make decisions only based on text
+
+---
+
+background-image: url("http://3.bp.blogspot.com/-FDjkfNyHOCA/UNNVcB9eBsI/AAAAAAAABp4/fivfG6senDU/s1600/fir-tree1.jpg")
+background-position: 90% 35%
+background-size: 20% 30%
+
+# The Data
+
+## Text mining
+
+The Fir Tree  
+H.C. Andersen  
+21 December 1844  
+EK (**e**ventyr**k**ode / fairly tale code) = 26
+
+Fairly early, one of first works displaying pessimism.
+
+
+???
+
+Types of data
+
+- Strings
+- Document term matrix
+- Corpus
+
+---
+
+# The Data
+
+## Modeling
+
+Movie reviews from [IMDb.com](IMDb.com)
+
+2 Movies
+
+---
+
+.pull-left[
+![](https://m.media-amazon.com/images/M/MV5BMzUxNzkzMzQtYjIxZC00NzU0LThkYTQtZjNhNTljMTA1MDA1L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg)
+]
+
+.pull-right[
+![](https://m.media-amazon.com/images/M/MV5BNWNiNTczNzEtMjQyZC00MjFmLTkzMDMtODk4ZGMyZmE0N2E4XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg)
+]
+
+---
+
+# Finding gold
+
+.medium[
+
+```r
+#devtools::install_github("emilhvitfeldt/hcandersenr")
+library(hcandersenr)
+```
+]
+
+Includes most of H.C. Andersens 157 fairly tales in 5 languages (Danish, German, English, Spanish, French).
+
+--
+
+.medium[
+
+```r
+library(dplyr)
+tree &lt;- hcandersen_en %&gt;%
+  filter(book == "The fir tree") %&gt;%
+  select(text)
+```
+]
+
+---
+
+# The Text
+
+.smallish[
+
+```r
+tree
+```
+
+```
+## # A tibble: 253 x 1
+##    text                                                                    
+##    &lt;chr&gt;                                                                   
+##  1 Far down in the forest, where the warm sun and the fresh air made a swe…
+##  2 resting-place, grew a pretty little fir-tree; and yet it was not happy,…
+##  3 wished so much to be tall like its companions– the pines and firs which…
+##  4 around it. The sun shone, and the soft air fluttered its leaves, and the
+##  5 little peasant children passed by, prattling merrily, but the fir-tree …
+##  6 them not. Sometimes the children would bring a large basket of raspberr…
+##  7 strawberries, wreathed on a straw, and seat themselves near the fir-tre…
+##  8 "say, \"Is it not a pretty little tree?\" which made it feel more unhap…
+##  9 before.                                                                 
+## 10 And yet all this while the tree grew a notch or joint taller every year…
+## # ... with 243 more rows
+```
+]
+
+---
+
+.pull-left[
+
+```r
+library(tidytext)
+
+*unnest_tokens(tree, word, text)
+```
+
+```
+## # A tibble: 3,288 x 1
+##    word  
+##    &lt;chr&gt; 
+##  1 far   
+##  2 down  
+##  3 in    
+##  4 the   
+##  5 forest
+##  6 where 
+##  7 the   
+##  8 warm  
+##  9 sun   
+## 10 and   
+## # ... with 3,278 more rows
+```
+]
+
+.pull-right[
+Observational unit: 
+
+- Document
+- Sentence
+- Word
+- Letter
+]
+
+---
+
+.pull-left[
+
+```r
+library(tidytext)
+
+*unnest_tokens(tree, word, text)
+```
+
+```
+## # A tibble: 3,288 x 1
+##    word  
+##    &lt;chr&gt; 
+##  1 far   
+##  2 down  
+##  3 in    
+##  4 the   
+##  5 forest
+##  6 where 
+##  7 the   
+##  8 warm  
+##  9 sun   
+## 10 and   
+## # ... with 3,278 more rows
+```
+]
+
+.pull-right[
+Observational unit: 
+
+- ~~Document~~
+- ~~Sentence~~
+- **Word**
+- ~~Letter~~
+
+Word tokens are default in `unnest_tokens()`
+]
+
+---
+
+
+```r
+library(tidytext)
+
+unnest_tokens(tree, word, text) %&gt;%
+* count(word, sort = TRUE)
+```
+
+```
+## # A tibble: 745 x 2
+##    word      n
+##    &lt;chr&gt; &lt;int&gt;
+##  1 the     278
+##  2 and     161
+##  3 tree     76
+##  4 it       66
+##  5 a        56
+##  6 in       55
+##  7 of       54
+##  8 to       54
+##  9 i        53
+## 10 was      39
+## # ... with 735 more rows
+```
+
+---
+
+
+```r
+library(tidytext)
+
+unnest_tokens(tree, word, text) %&gt;%
+* count(word, sort = TRUE)
+```
+
+```
+## # A tibble: 745 x 2
+##    word      n
+##    &lt;chr&gt; &lt;int&gt;
+*##  1 the     278
+*##  2 and     161
+##  3 tree     76
+*##  4 it       66
+*##  5 a        56
+*##  6 in       55
+*##  7 of       54
+*##  8 to       54
+*##  9 i        53
+*## 10 was      39
+## # ... with 735 more rows
+```
+
+--
+
+These words don't give us much context
+
+---
+
+# Stop words
+
+Stop words or "non-context" words are words that doens't add much to the text (filler that make sentences work).
+
+
+```r
+stop_words$word
+```
+
+```
+##    [1] "a"             "a's"           "able"          "about"        
+##    [5] "above"         "according"     "accordingly"   "across"       
+##    [9] "actually"      "after"         "afterwards"    "again"        
+##   [13] "against"       "ain't"         "all"           "allow"        
+##   [17] "allows"        "almost"        "alone"         "along"        
+##   [21] "already"       "also"          "although"      "always"       
+##   [25] "am"            "among"         "amongst"       "an"           
+##   [29] "and"           "another"       "any"           "anybody"      
+##   [33] "anyhow"        "anyone"        "anything"      "anyway"       
+...
+```
+
+---
+
+# Stop words
+
+Stop words or "non-context" words are words that doens't add much to the text (filler that make sentences work).
+
+Don't remove stop words willy nilly!  
+
+Pre-constructed word list might not work in your domain  
+
+Creating your own word list is hard...
+
+???
+
+Lean
+computer
+old
+
+---
+
+
+```r
+unnest_tokens(tree, word, text) %&gt;%
+* inner_join(stop_words, by = "word") %&gt;%
+  count(word, sort = TRUE) %&gt;%
+  top_n(50, n) %&gt;%
+  pull(word)
+```
+
+```
+##  [1] "the"   "and"   "it"    "a"     "in"    "of"    "to"    "i"    
+##  [9] "was"   "they"  "were"  "all"   "with"  "but"   "on"    "then" 
+## [17] "had"   "is"    "at"    "not"   "what"  "as"    "that"  "he"   
+## [25] "would" "you"   "its"   "out"   "so"    "be"    "them"  "this" 
+## [33] "down"  "said"  "for"   "have"  "how"   "we"    "been"  "very" 
+## [41] "when"  "where" "who"   "or"    "there" "while" "came"  "now"  
+## [49] "one"   "after" "by"    "my"    "only"  "their" "which"
+```
+
+Look at the words you remove (easy)  
+
+or know you stop word by heart (hard!!!)
+
+---
+
+
+```r
+unnest_tokens(tree, word, text) %&gt;%
+* anti_join(stop_words, by = "word") %&gt;%
+  count(word, sort = TRUE)
+```
+
+```
+## # A tibble: 500 x 2
+##    word         n
+##    &lt;chr&gt;    &lt;int&gt;
+##  1 tree        76
+##  2 fir         33
+##  3 branches    14
+##  4 story       14
+##  5 forest      13
+##  6 mice        12
+##  7 trees       12
+##  8 children    10
+##  9 dumpty      10
+## 10 humpty      10
+## # ... with 490 more rows
+```
+
+---
+
+
+```r
+library(ggplot2)
+unnest_tokens(tree, word, text) %&gt;%
+  anti_join(stop_words, by = "word") %&gt;%
+  count(word, sort = TRUE) %&gt;%
+  top_n(10, n) %&gt;%
+  ggplot(aes(reorder(word, n), n)) +
+  geom_col() +
+  coord_flip() +
+  theme_light() +
+  labs(x = "Times",
+       y = "Word",
+       title = "Word frequency in 'The Fur Tree'")
+```
+
+---
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-13-1.png" width="100%" /&gt;
+
+---
+
+
+```r
+unnest_tokens(tree, word, text) %&gt;%
+  mutate(pos = row_number(),
+         place = word == "story") %&gt;%
+  filter(place) %&gt;%
+  ggplot(aes(pos, place)) +
+  geom_point() +
+  theme_light() +
+  labs(x = "Position",
+       y = "",
+       title = "Occurence plot of word 'story'")
+```
+
+---
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-15-1.png" width="90%" /&gt;
+
+---
+
+
+```r
+unnest_tokens(tree, word, text) %&gt;%
+  mutate(pos = row_number(),
+         place = case_when(word == "story" ~ "story",
+                           word %in% c("tree", "trees") ~ "tree",
+                           word == "mice" ~ "mice",
+                           word == "children" ~ "children",
+                           word == "forest" ~ "forest",
+                           TRUE ~ NA_character_)) %&gt;%
+  drop_na() %&gt;%
+  ggplot(aes(pos, place, color = place)) +
+  geom_point() +
+  theme_light() +
+  guides(color = "none") +
+  labs(x = "Position",
+       y = "Word",
+       title = "Occurence plot of 'The Fur Tree'")
+```
+
+---
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-17-1.png" width="90%" /&gt;
+
+---
+
+## Going to the movies
+
+Scraped review (scraping_reviews.Rmd)
+
+
+```r
+library(readr)
+library(tidyr)
+reviews &lt;- read_csv("review_data.csv") %&gt;%
+  select(movie, rating, review) %&gt;%
+  drop_na()
+```
+
+.smallish[
+
+```
+## # A tibble: 703 x 3
+##    movie rating review                                                    
+##    &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;                                                     
+##  1 elf        9 "This was my 4th viewing and now ready to review.The stor…
+##  2 elf       10 "This was one of my favorite movies in 2003. Will Ferrell…
+##  3 elf        7 "Charming Christmas confection--about a boy raised by elv…
+##  4 elf       10 "Will Ferrell does a great job here, and it's the perfect…
+##  5 elf       10 It was so nice to be able to sit down and watch a movie f…
+##  6 elf        6 "This is a good natured holiday comedy that definitely is…
+##  7 elf        8 "BEWARE OF BOGUS REVIEWS. SOME REVIEWERS HAVE ONLY ONE RE…
+##  8 elf        6 A nice Christmas-themed movie. Nice is very apt for this …
+##  9 elf        9 "The most helpful thing I can tell you about this movie i…
+## 10 elf        8 "I do love Christmas movies, always a sucker for them eve…
+## # ... with 693 more rows
+```
+]
+
+---
+
+
+```r
+ggplot(reviews, aes(as.factor(rating), 1, fill = movie)) +
+  geom_col() +
+  facet_grid(~ movie) +
+  theme_minimal() +
+  labs(x = "Rating",
+       y = "Count") +
+  guides(fill = "none")
+```
+
+&lt;img src="slides_files/figure-html/unnamed-chunk-20-1.png" width="90%" /&gt;
+
+---
+
+## tidymodels
+
+
+```r
+library(tidymodels)
+#devtools::install_github("tidymodels/textrecipes")
+library(textrecipes)
+```
+
+`tidymodels` is a "meta-package" for modeling and statistical analysis that share the underlying design philosophy, grammar, and data structures of the tidyverse.
+
+`textrecipes` is an addition to the recipes package providing text processing capabilities (coming to CRAN any day)
+
+---
+
+.medium[
+
+```r
+set.seed(2018)
+
+split &lt;- reviews %&gt;%
+  mutate(good = factor(rating &gt; 5, labels = c("bad", "good"))) %&gt;%
+  select(good, text = review) %&gt;%
+  initial_split(props = 7 / 10)
+
+review_train &lt;- training(split)
+review_test  &lt;- testing(split)
+```
+]
+
+Splitting data into training and testing set
+
+Next we specify a preprocesing step using recipes
+
+---
+
+## What do we measure?
+
+![](https://user-images.githubusercontent.com/6179259/47669547-78c9f180-dbee-11e8-85e8-e01cb4cbe46d.png)
+
+---
+
+.medium[
+
+```r
+review_rec &lt;- recipe(good ~ ., data = review_train) %&gt;%
+  step_tokenize(text) %&gt;%
+  step_tokenfilter(text, max_tokens = 500) %&gt;%
+  step_tfidf(text) %&gt;%
+  prep(training = review_train)
+
+review_rec
+```
+]
+
+
+```
+## Data Recipe
+## 
+## Inputs:
+## 
+##       role #variables
+##    outcome          1
+##  predictor          1
+## 
+## Training data contained 528 data points and no missing data.
+## 
+## Operations:
+## 
+## Tokenization for text [trained]
+## Text filtering for text [trained]
+## Term frequency with text [trained]
+```
+
+---
+
+
+```r
+# Processed data
+train_data &lt;- juice(review_rec)
+test_data  &lt;- bake(review_rec, review_test, all_predictors())
+```
+
+
+```r
+train_data
+```
+
+```
+## # A tibble: 528 x 501
+##    good  tf_text_1 tf_text_10 tf_text_2 tf_text_5 tf_text_6 tf_text_7
+##    &lt;fct&gt;     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+##  1 good          0          0         0         0         0         0
+##  2 good          0          0         0         0         0         0
+##  3 good          0          0         0         0         0         0
+##  4 good          0          0         0         0         0         0
+##  5 good          0          0         0         0         0         0
+##  6 good          0          0         0         0         0         0
+##  7 good          0          0         0         1         0         0
+##  8 good          0          1         0         0         0         0
+##  9 good          0          1         0         0         0         0
+## 10 good          0          1         0         0         0         0
+## # ... with 518 more rows, and 494 more variables: tf_text_8 &lt;dbl&gt;,
+## #   tf_text_a &lt;dbl&gt;, tf_text_about &lt;dbl&gt;, tf_text_absolutely &lt;dbl&gt;,
+## #   tf_text_acting &lt;dbl&gt;, tf_text_action &lt;dbl&gt;, tf_text_actor &lt;dbl&gt;,
+## #   tf_text_actors &lt;dbl&gt;, tf_text_actually &lt;dbl&gt;, tf_text_added &lt;dbl&gt;,
+## #   tf_text_adult &lt;dbl&gt;, tf_text_adults &lt;dbl&gt;, tf_text_after &lt;dbl&gt;,
+## #   tf_text_again &lt;dbl&gt;, tf_text_all &lt;dbl&gt;, tf_text_almost &lt;dbl&gt;,
+## #   tf_text_along &lt;dbl&gt;, tf_text_already &lt;dbl&gt;, tf_text_also &lt;dbl&gt;,
+## #   tf_text_although &lt;dbl&gt;, tf_text_always &lt;dbl&gt;, tf_text_am &lt;dbl&gt;,
+## #   tf_text_amazing &lt;dbl&gt;, tf_text_an &lt;dbl&gt;, tf_text_and &lt;dbl&gt;,
+## #   tf_text_animated &lt;dbl&gt;, tf_text_annoying &lt;dbl&gt;, tf_text_another &lt;dbl&gt;,
+## #   tf_text_anthony &lt;dbl&gt;, tf_text_any &lt;dbl&gt;, tf_text_anyone &lt;dbl&gt;,
+## #   tf_text_anything &lt;dbl&gt;, tf_text_are &lt;dbl&gt;, tf_text_around &lt;dbl&gt;,
+## #   tf_text_as &lt;dbl&gt;, tf_text_asner &lt;dbl&gt;, tf_text_at &lt;dbl&gt;,
+## #   tf_text_audience &lt;dbl&gt;, tf_text_away &lt;dbl&gt;, tf_text_baby &lt;dbl&gt;,
+## #   tf_text_back &lt;dbl&gt;, tf_text_bad &lt;dbl&gt;, tf_text_be &lt;dbl&gt;,
+## #   tf_text_because &lt;dbl&gt;, tf_text_become &lt;dbl&gt;, tf_text_been &lt;dbl&gt;,
+## #   tf_text_before &lt;dbl&gt;, tf_text_being &lt;dbl&gt;, tf_text_believe &lt;dbl&gt;,
+## #   tf_text_best &lt;dbl&gt;, tf_text_better &lt;dbl&gt;, tf_text_between &lt;dbl&gt;,
+## #   tf_text_big &lt;dbl&gt;, tf_text_bit &lt;dbl&gt;, tf_text_bob &lt;dbl&gt;,
+## #   tf_text_book &lt;dbl&gt;, tf_text_boring &lt;dbl&gt;, tf_text_both &lt;dbl&gt;,
+## #   tf_text_brings &lt;dbl&gt;, tf_text_brought &lt;dbl&gt;, tf_text_buddy &lt;dbl&gt;,
+## #   `tf_text_buddy's` &lt;dbl&gt;, tf_text_but &lt;dbl&gt;, tf_text_buy &lt;dbl&gt;,
+## #   tf_text_by &lt;dbl&gt;, tf_text_caan &lt;dbl&gt;, tf_text_came &lt;dbl&gt;,
+## #   tf_text_can &lt;dbl&gt;, `tf_text_can't` &lt;dbl&gt;, tf_text_carey &lt;dbl&gt;,
+## #   tf_text_carrey &lt;dbl&gt;, `tf_text_carrey's` &lt;dbl&gt;, tf_text_cartoon &lt;dbl&gt;,
+## #   tf_text_cast &lt;dbl&gt;, tf_text_character &lt;dbl&gt;, tf_text_characters &lt;dbl&gt;,
+## #   tf_text_charming &lt;dbl&gt;, tf_text_child &lt;dbl&gt;, tf_text_childhood &lt;dbl&gt;,
+## #   tf_text_children &lt;dbl&gt;, `tf_text_children's` &lt;dbl&gt;,
+## #   tf_text_christmas &lt;dbl&gt;, tf_text_cindy &lt;dbl&gt;, tf_text_city &lt;dbl&gt;,
+## #   tf_text_classic &lt;dbl&gt;, tf_text_claus &lt;dbl&gt;, tf_text_come &lt;dbl&gt;,
+## #   tf_text_comedy &lt;dbl&gt;, tf_text_comes &lt;dbl&gt;, tf_text_completely &lt;dbl&gt;,
+## #   tf_text_costumes &lt;dbl&gt;, tf_text_could &lt;dbl&gt;, `tf_text_couldn't` &lt;dbl&gt;,
+## #   tf_text_course &lt;dbl&gt;, tf_text_cute &lt;dbl&gt;, tf_text_dad &lt;dbl&gt;,
+## #   tf_text_day &lt;dbl&gt;, tf_text_definitely &lt;dbl&gt;, tf_text_department &lt;dbl&gt;,
+## #   tf_text_deschanel &lt;dbl&gt;, …
+```
+
+---
+
+
+```r
+review_model &lt;- logistic_reg() %&gt;%
+  set_engine("glm")
+```
+
+
+```r
+review_fit &lt;- review_model %&gt;%
+  fit(good ~ ., data = train_data)
+```
+
+
+```r
+test_results &lt;- review_test %&gt;%
+  select(good) %&gt;%
+  as_tibble() %&gt;%
+  mutate(
+    class = predict_class(review_fit, test_data),
+  )
+
+test_results %&gt;% accuracy(truth = good, estimate = class)
+```
+
+```
+## # A tibble: 1 x 3
+##   .metric  .estimator .estimate
+##   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
+## 1 accuracy binary          0.56
+```
+
+
+(This is not an example of finished classification. The Accuracy is not that good, but the general steps you would follow.)
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
