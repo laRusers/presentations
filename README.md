@@ -2,6 +2,11 @@
 
 Slides and other materials from presentations at the LA East R User Meetup
 
+# 2019
+
+* 01/14/2019: [Anthony Doan](), ["Time Series & ARIMA forecasting"](); [Yemi Odeyemi](), ["Classification and Statistical Analysis of Cancer Mutations Scores"]()
+
+
 # 2018
 
 * 12/10/2018: [Robert Mitchell](http://robertmitchellv.com/), ["Interactive Dashboards with Shiny"](https://github.com/robertmitchellv/talks/blob/master/2018-12-10-East-LA-R-Users/2018-12-East-LA-R-Users.md); [Emil Hvitfeldt](https://www.hvitfeldt.me/), ["Text Analysis in R: Special Christmas Edition"](https://htmlpreview.github.io/?https://github.com/EmilHvitfeldt/laerug-Text-Mining-2018/blob/master/slides.html)
