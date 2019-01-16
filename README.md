@@ -1,4 +1,4 @@
-# LA East R Users Presentations
+# LA East R Users Presentations <img src="https://github.com/laeRusers/logos/blob/master/laerug_hexsticker.png" align="right" width="120" />
 
 Slides and other materials from presentations at the LA East R User Meetup
 
