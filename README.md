@@ -3,9 +3,12 @@
 Slides and other materials from presentations at the LA East R User Meetup
 
 # 2019
+* 01/14/2019
 
-* 01/14/2019: Anthony Doan, ["Time Series & ARIMA forecasting"](https://github.com/laeRusers/presentations/blob/master/2019-01-14_arima_cancermutations/arima_timeseries/LAERUG_time_series_arima_forecasting_with_r.pdf); Yemi Odeyemi, ["Classification and Statistical Analysis of Cancer Mutations Scores"]()
-
+|Speakers|Topics|
+|---|---|
+|Anthony Doan|["Time Series & ARIMA forecasting"](https://github.com/laeRusers/presentations/blob/master/2019-01-14_arima_cancermutations/arima_timeseries/LAERUG_time_series_arima_forecasting_with_r.pdf)|
+|Yemi Odeyemi|["Classification and Statistical Analysis of Cancer Mutations Scores"]()|
 
 # 2018
 
