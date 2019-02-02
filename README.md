@@ -9,7 +9,7 @@ Slides and other materials from presentations at the LA East R User Meetup
 |02/11/2019|[John Rosenfelder](https://twitter.com/earbender)|["Working with data in the music business"]()|
 ||[Alan Dipert](https://twitter.com/alandipert)|["JavaScript for the R Programmer"]()|
 |01/14/2019|[Anthony Doan](https://twitter.com/AnthonyDoan20)|["Time Series & ARIMA forecasting"](https://github.com/laeRusers/presentations/blob/master/2019-01-14_arima_cancermutations/arima_timeseries/LAERUG_time_series_arima_forecasting_with_r.pdf)|
-||Yemi Odeyemi|["Classification and Statistical Analysis of Cancer Mutations Scores"]()|
+||Yemi Odeyemi|"Classification and Statistical Analysis of Cancer Mutations Scores"|
 
 # 2018
  
