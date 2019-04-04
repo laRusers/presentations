@@ -7,7 +7,7 @@ Slides and other materials from presentations at the LA East R User Meetup
 |Dates|Speakers|Topics|
 |:-|:-|:-|
 |03/18/2019|[Daniel Chu]()|"Functional programming with purrr"|
-||[Alan Dipert](https://twitter.com/alandipert)|"JavaScript for the R Programmer"|
+||[Alan Dipert](https://twitter.com/alandipert)|["JavaScript for the R Programmer"](https://github.com/laeRusers/presentations/blob/master/2019-03-19-JavaScript-for-the-R-Programmer-JS-for-useR.pdf)|
 |02/11/2019|[John Rosenfelder](https://twitter.com/earbender)|["Working with data in the music business"](https://github.com/laeRusers/presentations/blob/master/2019-02-11-data_music_biz_rstudioconf/USC%20Talk%20February%2011%202019.pptx)|
 ||[Zhi Yang](https://twitter.com/zhiiiyang)|["What I learned at rstudio::conf"](https://learnfromrstudioconf.netlify.com/)|
 |01/14/2019|[Anthony Doan](https://twitter.com/AnthonyDoan20)|["Time Series & ARIMA forecasting"](https://github.com/laeRusers/presentations/blob/master/2019-01-14_arima_cancermutations/arima_timeseries/LAERUG_time_series_arima_forecasting_with_r.pdf)|
