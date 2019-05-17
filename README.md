@@ -6,11 +6,11 @@ Slides and other materials from presentations at the LA East R User Meetup
 
 |Dates|Speakers|Topics|
 |:-|:-|:-|
-|05/13/2019|[Eric S. Kawaguchi](https://sites.google.com/site/eskawaguchi/home)|["A Fast and Scalable Sparse Regression Method for Competing Risks Data"]()|
-||[Yujie Cui](https://www.linkedin.com/in/yujie-cui-18772a4a/)|["Monitor Patient Enrollment with flexdashboard and shinydashboard Packages"]()|
+|05/13/2019|[Eric S. Kawaguchi](https://sites.google.com/site/eskawaguchi/home)|["A Fast and Scalable Sparse Regression Method for Competing Risks Data"](2019-05-13-sparse_regression_for_competing_risks_data/2019-05-13-sparse_regression_for_competing_risks_data.pdf)|
+||[Yujie Cui](https://www.linkedin.com/in/yujie-cui-18772a4a/)|["Monitor Patient Enrollment with flexdashboard and shinydashboard Packages"](2019-05-13-patient_enrollment_dashbaords/2019-05-13-patient_enrollment_dashbaords.pptx)|
 |04/08/2019|[Zev Youra](https://twitter.com/zzzev)|["Data Visualization from Start to Finish"](https://t.co/jHNvVX8OTL)|
 ||[Zhi Yang](https://twitter.com/zhiiiyang)|["Bayesian Modeling with R2jags"](http://r2jags.netlify.com)|
-|03/18/2019|[Daniel Chu]()|["Functional programming with purrr"](https://github.com/laeRusers/presentations/blob/master/2019-03-18-functional_programming_with_purrr/2019-03-18-Functional_programming_with_purrr.pdf)|
+|03/18/2019|[Daniel Chu]()|["Functional programming with purrr"](2019-03-18-functional_programming_with_purrr/2019-03-18-functional_programming_with_purrr.pdf)|
 ||[Alan Dipert](https://twitter.com/alandipert)|["JavaScript for the R Programmer"](https://github.com/laeRusers/presentations/blob/master/2019-03-18-functional_programming_with_purrr/2019-03-18-JavaScript-for-the-R-Programmer-JS-for-useR.pdf)|
 |02/11/2019|[John Rosenfelder](https://twitter.com/earbender)|["Working with data in the music business"](https://github.com/laeRusers/presentations/blob/master/2019-02-11-data_music_biz_rstudioconf/USC%20Talk%20February%2011%202019.pptx)|
 ||[Zhi Yang](https://twitter.com/zhiiiyang)|["What I learned at rstudio::conf"](https://learnfromrstudioconf.netlify.com/)|
