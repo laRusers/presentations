@@ -29,3 +29,12 @@ Slides and other materials from presentations at the LA East R User Meetup
 ||[Malcolm Barrett](https://malco.io)|["ggplotline: Telling a story with labels, colors, and layout"](https://malco.io/slides/ggplotline/)|
 
 
+# LA West R Users Presentations <img src="https://github.com/laRusers/logos/blob/master/lawrug_hex.png" align="right" width="120" />
+
+Slides and other materials from presentations at the LA West R User Meetup
+
+# 2019
+
+|Dates|Speakers|Topics|
+|:-|:-|:-|
+|05/28/2019|[Szilard Pafka](http://datascience.la/)|"Better than Deep Learning: Gradient Boosting Machines (GBM) – 2019 edition"|
