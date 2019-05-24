@@ -28,6 +28,7 @@ Slides and other materials from presentations at the LA East R User Meetup
 |10/08/2018|[Paul Marjoram](https://profiles.sc-ctsi.org/paul.marjoram)|["Introduction to the Biostatistics Division"](2018-10-08_welcoming_ggplotline/biostats/2018-10-08-biostats-div.pdf)|
 ||[Malcolm Barrett](https://malco.io)|["ggplotline: Telling a story with labels, colors, and layout"](https://malco.io/slides/ggplotline/)|
 
+<br>
 
 # LA West R Users Presentations <img src="https://github.com/laRusers/logos/blob/master/lawrug_hex.png" align="right" width="120" />
 
