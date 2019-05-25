@@ -11,7 +11,7 @@ Slides and other materials from presentations at the LA East R User Meetup
 |04/08/2019|[Zev Youra](https://twitter.com/zzzev)|["Data Visualization from Start to Finish"](https://t.co/jHNvVX8OTL)|
 ||[Zhi Yang](https://twitter.com/zhiiiyang)|["Bayesian Modeling with R2jags"](http://r2jags.netlify.com)|
 |03/18/2019|[Daniel Chu]()|["Functional programming with purrr"](2019-03-18-functional_programming_with_purrr/2019-03-18-functional_programming_with_purrr.pdf)|
-||[Alan Dipert](https://twitter.com/alandipert)|["JavaScript for the R Programmer"](https://github.com/laeRusers/presentations/blob/master/2019-03-18-functional_programming_with_purrr/2019-03-18-JavaScript-for-the-R-Programmer-JS-for-useR.pdf)|
+||[Alan Dipert](https://twitter.com/alandipert)|["JavaScript for the R Programmer"](https://github.com/laRusers/presentations/blob/master/2019-03-18-JavaScript-for-the-R-Programmer-JS-for-useR/2019-03-18-JavaScript-for-the-R-Programmer-JS-for-useR.pdf)|
 |02/11/2019|[John Rosenfelder](https://twitter.com/earbender)|["Working with data in the music business"](https://github.com/laeRusers/presentations/blob/master/2019-02-11-data_music_biz_rstudioconf/USC%20Talk%20February%2011%202019.pptx)|
 ||[Zhi Yang](https://twitter.com/zhiiiyang)|["What I learned at rstudio::conf"](https://learnfromrstudioconf.netlify.com/)|
 |01/14/2019|[Anthony Doan](https://twitter.com/AnthonyDoan20)|["Time Series & ARIMA forecasting"](https://github.com/laeRusers/presentations/blob/master/2019-01-14_arima_cancermutations/arima_timeseries/LAERUG_time_series_arima_forecasting_with_r.pdf)|
