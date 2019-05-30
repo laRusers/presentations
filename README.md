@@ -36,6 +36,6 @@ Slides and other materials from presentations at the LA West R User Meetup
 
 # 2019
 
-|Dates|Speakers|Topics|
-|:-|:-|:-|
-|05/28/2019|[Szilard Pafka](http://datascience.la/)|["Better than Deep Learning: Gradient Boosting Machines (GBM) – 2019 edition"](https://github.com/laRusers/presentations/blob/master/2019-05-28-better-than-dl-gbm/gbm-dl-Szilard-2019.pdf)|
+|Dates|Speakers|Topics|Video|
+|:-|:-|:-|:-|
+|05/28/2019|[Szilard Pafka](http://datascience.la/)|["Better than Deep Learning: Gradient Boosting Machines (GBM) – 2019 edition"](https://github.com/laRusers/presentations/blob/master/2019-05-28-better-than-dl-gbm/gbm-dl-Szilard-2019.pdf)|[Video](https://youtu.be/HMpI4-LB7UA)
