@@ -1,0 +1,618 @@
+---
+title: "It’s not that we don’t test our code, it’s that we don’t store our tests"
+subtitle: "Unit testing"
+author: "John Peach"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: [default, metropolis, metropolis-fonts, unittest.css]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+background-image: url('TypesofSoftwareTesting.png')
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+options(servr.daemon = TRUE)
+```
+
+# Types of Testing
+
+---
+# What is unit testing?
+
+* **Code** that tests a small piece of functionality
+  * A unit is often a class or function
+  * One unit can have multiple tests
+
+--
+* Test that it **does the right thing**, not how it does it
+  * *contract*: input and output to the unit
+  * Do *not* test how the work is performed
+
+--
+* Tests ensures that the **code meets expectations**
+  * and continues to meet expectations over time
+
+--
+* Tests are **isolated** from each other
+
+
+---
+
+# Why unit test?
+
+* Faster debugging
+* Faster development
+* Better design
+* Detect regressions (when you introduce a bug)
+* Reduce maintenance costs
+* Provides a living documentation of the system
+* Refactoring your code and know that you have not broken anything
+
+---
+
+# How are unit better than manual tests?
+
+* All components are tested at least once
+* Scope of test is smaller
+* Advantages
+  * Isolated
+  * Repeatable
+  * Automatable
+  * Easy to write
+  * Robust to changes in the components around it
+
+---
+
+# Why unit testing is not common
+
+**I don't have time to write tests because I am too busy debugging**
+--
+
+* **Extra work**: Once I debug my code I have to write test code
+  * Unit tests help you debug more quickly
+  * Write tests as you write your code
+--
+
+* **I tested my code, it works**:
+  * We manually test and throw the test away
+  * We test, just not in a way that is reproducible
+---
+
+# Why unit testing is not common
+
+* **Writing tests is slow**: 
+  * Adding and removing print statements is slow
+  * Manually retest, over and over again. This is very slow
+--
+
+* **I am too busy tracking down a bug**:
+  * Future you does not test all aspects and bugs are created
+  * Future bugs that are hard to track down.
+--
+
+* **Do not know how to unit test**: 
+  * It is simple, I will show you. 
+
+---
+
+# Structure of a unit test
+
+* Setup
+* Prepare an input
+* Call function
+* Check output
+* Tear down
+---
+
+# Properties of good tests
+
+* **Mocking**
+  * Isolation: Tests are independent of dependencies
+  * Serialize and hard-code data that is outside of the test
+  * Avoid system variables and `options()`
+--
+
+* **Consistent**
+  * Multiple runs must return the same result
+  * Use `set.seed()`
+---
+
+# Properties of good tests
+
+* **Atomic**
+  * Tests are PASS or FAIL, no partial success cases
+  * Isolation: Test B should not depend on the outcome of test A
+--
+
+* **Single responsibility**
+  * One scenario per test
+  * Test behaviours not functions
+  * One function with multiple behaviours: multiple tests
+  * One behaviour, multiple functions: one test
+---
+
+# Properties of good tests
+
+* **Self-descriptive**
+  * Write tests such that they self-document
+--
+
+* **No conditional logic or loops**
+  * Test should have no uncertainty
+  * All inputs are known
+  * Behaviour is predictable
+  * Expected outputs should be strictly defined
+  * If you desire to have an `if` or `case_when` split it into multiple tests
+---
+
+# Properties of good tests
+
+* **No exception handling**
+  * When testing failures, only catch the exception that you are expecting
+  * Fail test if expected exception is not caught
+  * Let other exceptions go uncaught
+--
+
+* **Informative assertion messages**
+  * Describe why the test failed and what to do
+  * Include business logic information in the message
+---
+
+# Properties of good tests
+
+* **Separate tests and production code**
+  * No test code in the production code
+  * Do production functions that are only used by tests
+---
+
+# What do you test?
+
+## Test the golden path
+
+* Test the contract (the expected input and output)
+* Test assumptions that the unit is making 
+  * parameter types, range of values, etc.
+* Test the trivial cases
+* Test the most complex logic
+* Test each feature once
+---
+
+# What do you test?
+
+## Test failure modes
+
+* Test the known error conditions
+* Cover boundary cases
+  * negatives, `0`, empty, `NA`, `NaN`, `infinity`, wrong data type
+  * R does automatic casting or functions return different data types
+* Provide negative tests (designed to fail)
+  * Results in more error conditions being handled
+---
+
+# Organizing your tests
+* Collect tests into themes
+* Keep the tests small and simple (i.e. fast)
+* Must not require interaction (mock interaction)
+* Keep tests independent
+  * `testthat` does not clean up side-effects you have to do that manually
+  * Mock dependent functions; fewer dependencies
+* Name tests files by the feature
+  * One test file per feature
+  * Using a naming convention: 'test[FEATURE]' 
+---
+
+# Before checking in your code
+
+* Pass all tests before checking code in
+* If features are not complete, `skip()` the test but have a test
+* Fix failing test immediately
+* If you find a bug and fix it, write a test for the bug (even though you fixed it)
+---
+class: inverse, middle, center
+
+# testthat
+
+---
+
+# Introduction
+
+* Developed by Hadley Wickham
+* [testthat: Get Started with Testing](http://vita.had.co.nz/papers/testthat.pdf)
+    * The R Journal, vol. 3, no. 1, pp. 5–10, 2011
+* Much easier to use than `RUnit` and `svUnit`
+* Has become the defacto standard in R
+* Well integrated into RStudio and the tidyverse
+* Does not clean up the environment
+---
+
+# Hierarchical structure
+
+* The structure of tests are hierarchiral
+
+    * **Context**: group tests together by related functionality
+    * **Tests**: group expectations together
+    * **Expectations**: describe what the result of a computation should be
+---
+
+# Context
+
+* Groups a set of tests that are related by a functionality
+* Generally, one `context()` per test file
+* Generally, you have one for each class or set of related functions
+
+Command: `testthat::context(desc)`
+
+Example: `testthat::context("Joining strings")`
+---
+
+# Tests
+
+* Groups related expectations together
+* Check variations of the expectation
+
+Command: `testthat::test_that(desc, code)`
+Example: 
+```r
+test_that("basic case works", {
+  test <- c("a", "b", "c")
+
+  expect_equal(str_c(test), test)
+  expect_equal(str_c(test, sep = " "), test)
+  expect_equal(str_c(test, collapse = ""), "abc")
+})
+```
+---
+
+# Expectations
+
+* The heart of the system. Simple test of the expectations
+* Describes the explicit result of a computation
+  * does it have the right value, class, length, or throw an exception, warning, message
+* starts with `expect_`
+* There are two methods families of expectations
+1. `expect_that()` - old school
+1. `expect_CONDITION()` - new school. `CONDITION` is a label
+---
+
+# Expectations - Old School
+
+A `condition` is a function that returns a boolean and an error message.
+
+Command: 
+```r
+expect_that(object, condition, info, label)
+```
+
+Example:
+```r
+expect_that(1 + 1, equals(2))
+```
+
+---
+
+# Expectation conditions - Old School
+
+Older code used conditions, and they still work. 
+
+Avoid using them as they have been **soft-depricated**
+
+.pull-left[
+* `equals()`
+* `all.equal()`
+* `is_identical_to()`
+* `is_equivalent_to()`
+* `is_a()`
+* `matches()`
+]
+
+.pull-right[
+* `prints_text()`
+* `shows_message()`
+* `gives_warning()`
+* `throws_error()`
+* `is_true()`
+]
+---
+
+# Expectations - New School
+
+There is a mapping from old to new school
+
+* `expect_that(x, is_true())` -> `expect_true(x, y)`
+* `expect_that(x, is_a(y))` -> `expect_is(x, y)`
+* `expect_that(x, throws_error(y))` -> `expect_error(x, y)`
+---
+
+# Expectations - New School
+
+* There are several families of expectations built around `expect_that`
+
+## comparison
+
+`expect_lt()`, `expect_lte()`, `expect_gt()`, `expect_gte()`
+
+## Equality
+
+`expect_equal()`, `expect_equivalent()`, `expect_identical()`
+---
+
+# Expectations - New School
+
+## Length
+
+`expect_length()`
+
+## RegEx matching
+
+`expect_match()`
+
+## Output
+
+`expect_output()`, `expect_output_file()`, `expect_error()`, 
+`expect_message()`, `expect_warning()`, `expect_silent()`
+---
+
+# Expectations - New School
+
+## Inheritance
+
+`expect_null()`, `expect_type()`, `expect_is()`, `expect_s3_class()`,
+`expect_s4_class()`
+
+## Logical
+
+`expect_true()`, `expect_false()`
+
+## Reference file / object
+
+`expect_equal_to_reference()`
+
+---
+
+# Expectations - New School
+
+## Expectations that will always fail or succeed
+
+`fail()`, `succeed()`
+
+## Check the names of an object
+
+`expect_named()`
+---
+
+
+# Putting it all together
+
+```r
+context("Joining strings")
+
+test_that("basic case works", {
+  test <- c("a", "b", "c")
+
+  expect_equal(str_c(test), test)
+  expect_equal(str_c(test, sep = " "), test)
+  expect_equal(str_c(test, collapse = ""), "abc")
+  rm(test)
+})
+
+test_that("NULLs are dropped", {
+  # more expectations
+})
+```
+---
+
+# Skipping tests
+  * During development, write your tests as you write your code
+  * Instead of testing manually, write a test.
+  * Some times dependencies are not meet but you have written the test, you can
+  * Skip a test using: `skip(message)`
+
+```r  
+testthat::test_that('boolfunc is a stub', {
+  skip('The boolfunc has not been written yet')
+  expect_equal(boolfunc, TRUE)
+})
+```
+---
+
+# Skipping tests
+
+You can also do conditional skipping based on conditions or environment
+
+## Conditional
+`skip_if_not()`, `skip_if()`
+
+## Enviroment
+`skip_if_not_installed()`, `skip_on_cran()`, `skip_on_os()`, `skip_on_travis()`,
+`skip_on_appveyor()`, `skip_on_bioc()`, `skip_if_translated()`
+---
+
+# Setup and Tear down
+* `testthat` does not tear down your environment
+* Do not change your environment!
+* Setup and clean up your environment manually
+  * Clean-up side-effects (writing a file, remove vars)
+
+```r
+test_that("basic case works", {
+  test <- c("a", "b", "c")  # setup
+  expect_equal(str_c(test), test) # expectation
+  rm(test) # tear down
+})
+```
+---
+
+# Setup the testing environment
+
+```r
+usethis::use_test('my-test')
+
+#> ✔ Adding 'testthat' to Suggests field in DESCRIPTION
+#> ✔ Creating 'tests/testthat/'
+#> ✔ Writing 'tests/testthat.R'
+#> ✔ Writing 'tests/testthat/test-my-test.R'
+```
+
+* Test files are in `test/testthat/`
+* filename must start with `test`
+---
+  
+# Contents of tests/testthat.R
+
+```r
+library(testthat)
+library(myPackage)
+
+test_check("myPackage")
+```
+---
+
+# Test Workflow Cycle
+1. Write tests and code
+  * `usethis::use_test()` creates a new test file
+1. Running tests (choose one)
+  * Ctrl/Cmd-shift-t
+  * `devtools::test()`
+  * `devtools::check()` runs tests and does other things
+  * `R CMD check` 
+1. Fix bugs
+1. Repeat
+---
+
+# Test Output
+
+* Number of passed, failed, warnings and skipped tests
+* One line per context 
+* Label is what you put in the context.
+
+```r
+Testing stringr
+✔ | OK F W S | Context
+✔ |  4       | case
+✔ |  1       | conv
+✔ |  4       | Counting matches
+✖ | 34 1     | Replacements
+```
+---
+
+# Failure message:
+
+Error messages printed below the context.
+
+One message for each error
+
+```r
+test-replace.r:7: failure: basic replacement works
+str_replace("abababa", "ba", "BA") not equal to "aBAbabaBAD".
+1/1 mismatches
+x[1]: "aBAbaba"
+y[1]: "aBAbabaBAD"
+```
+---
+
+# Failure message:
+
+Provide meaningful messages, of what went wrong
+```r
+> expect_true(FALSE == TRUE)
+Error: FALSE == TRUE isn't true.
+
+> expect_true(FALSE == TRUE, 
+              'this will never be true')
+Error: FALSE == TRUE isn't true.
+this will never be true
+```
+---
+
+# Alternative methods for running tests
+
+.pull-left[
+`test_file()`
+
+`test_dir()`
+
+`test_package()`
+
+`test_check()`
+]
+
+.pull-right[
+Test a single file
+
+Run all tests in a dir
+
+Interactive testing
+
+Used in `R CMD check`
+]
+---
+
+# Controlling the test output
+
+The `test_` methods have a `reporter` that defines what information is printed and the behaviour
+
+* **check**: only gives the last 13 lines of output
+* **debug**: Calls `recover()` on all fail expectations
+* **list**: Details on the tests; time, filenames, etc.
+* **location**: Gives the location of every error
+* **minimal**: Minimal info; pass/fail/error
+* **silent**: Info on errors. Use `expectations()` for results
+* **summary**: Meant for interactive use
+* **stop**: `stops()` on the first failed test
+---
+
+# Standardized output
+
+There is also support of standardized output such as `JUnit`, `Teamcity`, `Test Anything Protocol (TAP)`
+---
+
+# Unit Test Design Patterns
+
+## Arrange, Act, Assert Pattern
+
+```r
+testthat::test_that("Arrange, Act, Assert Pattern Example", {
+  # Arrange
+  foo <- 'FOO'
+  bar <- 'BAR'
+    
+  # Act
+  foobar <- paste0(foo, bar)
+    
+  # Assert
+  expect_match(foobar, 'FOOBAR')
+})
+```
+---
+# Unit Test Design Patterns
+
+## Given, When, Then
+
+```r
+testthat::test_that('Given, When, Then Pattern Example', {
+  # Given
+  isValid <- TRUE
+  isResult <- TRUE
+    
+  # When
+  if (isResult == isValid) {
+    isWorking <- TRUE
+  }
+    
+  # Then
+  expect_identical(isWorking, isResult)
+})
+```
+---
+class: inverse, middle, center
+
+# Demo
+---
+class: inverse, middle, center
+
+# Thanks!
