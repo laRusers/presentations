@@ -7,7 +7,7 @@ Slides and other materials from presentations at the LA East R User Meetup
 |Dates|Speakers|Topics|
 |:-|:-|:-|
 |06/10/2019|[John Peach](https://www.linkedin.com/in/jpeach/)|["It’s not that we don’t test our code, it’s that we don’t store our tests"](2019-06-10-unit_testing/unittest.pdf)|
-||||
+||[George G Vega Yon](https://ggvy.cl)|[What drives social networks?: A gentle introduction to exponential random graph models (with a focus on small networks)]()|
 |05/13/2019|[Eric S. Kawaguchi](https://sites.google.com/site/eskawaguchi/home)|["A Fast and Scalable Sparse Regression Method for Competing Risks Data"](2019-05-13-sparse_regression_for_competing_risks_data/2019-05-13-sparse_regression_for_competing_risks_data.pdf)|
 ||[Yujie Cui](https://www.linkedin.com/in/yujie-cui-18772a4a/)|["Monitor Patient Enrollment with flexdashboard and shinydashboard Packages"](2019-05-13-patient_enrollment_dashbaords/2019-05-13-patient_enrollment_dashbaords.pptx)|
 |04/08/2019|[Zev Youra](https://twitter.com/zzzev)|["Data Visualization from Start to Finish"](https://t.co/jHNvVX8OTL)|
