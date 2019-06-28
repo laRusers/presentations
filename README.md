@@ -40,4 +40,7 @@ Slides and other materials from presentations at the LA West R User Meetup
 
 |Dates|Speakers|Topics|Video|
 |:-|:-|:-|:-|
-|05/28/2019|[Szilard Pafka](http://datascience.la/)|["Better than Deep Learning: Gradient Boosting Machines (GBM) – 2019 edition"](https://github.com/laRusers/presentations/blob/master/2019-05-28-better-than-dl-gbm/gbm-dl-Szilard-2019.pdf)|[Video](https://youtu.be/HMpI4-LB7UA)
+|[05/28/2019](https://github.com/laRusers/presentations/blob/master/2019-05-28-better-than-dl-gbm/lawr_may28.pdf)|[Szilard Pafka](http://datascience.la/)|["Better than Deep Learning: Gradient Boosting Machines (GBM) – 2019 edition"](https://github.com/laRusers/presentations/blob/master/2019-05-28-better-than-dl-gbm/gbm-dl-Szilard-2019.pdf)|[Video](https://youtu.be/HMpI4-LB7UA)|
+|[06/27/2019](https://github.com/laRusers/presentations/blob/master/2019-06-28-clv-nba/00LAWRUG-intro.pdf)|[Corinne Powers](https://www.linkedin.com/in/corinne-powers-22151727/)|[Using GLRM on h2o to Predict Customer Lifetime Value
+](https://github.com/laRusers/presentations/blob/master/2019-06-28-clv-nba/01Using%20GLRM%20on%20H2O.ai.pdf)||
+||[Michael Tzen](https://www.linkedin.com/in/michael-t-65783537/)|[Are there any Globe Trotter Body Swappers to Figure out Who's who in NBA Lineups?](https://github.com/laRusers/presentations/blob/master/2019-06-28-clv-nba/02slides_globetrotter.pdf)||
