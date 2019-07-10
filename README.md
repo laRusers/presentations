@@ -6,7 +6,7 @@ Slides and other materials from presentations at the LA East R User Meetup
 
 |Dates|Speakers|Topics|
 |:-|:-|:-|
-|07/08/2019|[Seo Young (Silvia) Kim](https://twitter.com/sysilviakim?lang=en)|["Bayesian Analysis with rstan, rstanarm, and brms"]()|
+|07/08/2019|[Seo Young Silvia Kim](https://twitter.com/sysilviakim?lang=en)|["Bayesian Analysis with rstan, rstanarm, and brms"]()|
 ||[Jared Kai Swan](https://twitter.com/Le_Cygne_Rouge)|["Super speedy data manipulation with data.table: An overview"](2019-07-09_datatable/data-table-intro.R)|
 |06/10/2019|[John Peach](https://www.linkedin.com/in/jpeach/)|["It’s not that we don’t test our code, it’s that we don’t store our tests"](2019-06-10-unit_testing/unittest.pdf)|
 ||[George G Vega Yon](https://ggvy.cl)|[What drives social networks?: A gentle introduction to exponential random graph models (with a focus on small networks)]()|
