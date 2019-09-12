@@ -6,7 +6,7 @@ Slides and other materials from presentations at the LA East R User Meetup
 
 |Dates|Speakers|Topics|
 |:-|:-|:-|
-|09/09/2019|[Jesse Sadler](https://twitter.com/vivalosburros?lang=en)|["Creating custom vector classes with the vctrs package"]()|
+|09/09/2019|[Jesse Sadler](https://twitter.com/vivalosburros?lang=en)|["Creating custom vector classes with the vctrs package"](2019-09-09_vctrs/Sadler-custom-classes-with-vctrs_1.pdf)|
 ||[Sylvia Tran](https://www.linkedin.com/in/sylvia-s-tran/)|["Python for R Users"](https://github.com/godsylla/python-for-R-users)|
 |08/12/2019|[Donna Wrublewski](https://twitter.com/caltechchemlib?lang=en)|["Teaching ggplot2 with the Periodic Table"](https://caltechlibrary.github.io/R-Deep-Dive-ggplot2/)|
 ||[Malcolm Barrett](https://twitter.com/malco_barrett?lang=en)|["The YAML problem: Writing and working with YAML with ymlthis"](https://github.com/malcolmbarrett/ymlthis_talk)|
