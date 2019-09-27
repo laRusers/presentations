@@ -46,6 +46,7 @@ Slides and other materials from presentations at the LA West R User Meetup
 
 |Dates|Speakers|Topics|Video|
 |:-|:-|:-|:-|
+|[05/28/2019](https://github.com/laRusers/presentations/blob/master/2019-09-26-purrr/LAWRUG%20-%20Sep%2026%2C%202019.pdf)|[Malcolm Barrett](https://malco.io)|["Functional programming with purrr"](https://lar-purrr.netlify.com/)||
 |[07/31/2019](https://github.com/laRusers/presentations/blob/master/2019-07-31-user-stringdist/LAWRUG%20-%20July%2031%2C%202019.pdf)|[Amy Tzu-Yu Chen](https://amy17519.me)|[useR! 2019 Recap](https://github.com/laRusers/presentations/blob/master/2019-07-31-user-stringdist/AmyuseR2019.pdf)||
 ||[Jeremy Guinta](https://www.linkedin.com/in/jeremyguinta/) & [Nellie Ponarul](https://www.linkedin.com/in/nellie-ponarul-31944aa0/)|[Better Name Matching via Machine Learning](https://github.com/laRusers/presentations/blob/master/2019-07-31-user-stringdist/Jeremy_Nellie_KnowledgeShare_MachineLearning.pdf)||
 |[06/27/2019](https://github.com/laRusers/presentations/blob/master/2019-06-28-clv-nba/00LAWRUG-intro.pdf)|[Corinne Powers](https://www.linkedin.com/in/corinne-powers-22151727/)|[Using GLRM on h2o to Predict Customer Lifetime Value](https://github.com/laRusers/presentations/blob/master/2019-06-28-clv-nba/01Using%20GLRM%20on%20H2O.ai.pdf)||
