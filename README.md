@@ -7,8 +7,7 @@ Slides and other materials from presentations at the LA East R User Meetup
 |Dates|Speakers|Topics|
 |:-|:-|:-|
 |10/14/2019|[Charlotte Deng](https://www.linkedin.com/in/huiyu-deng-a020745a)|["A gentle Introduction Using R for Deep Learning"](2019-10-14-deeplearning/)|
-||[Jo Hardin](https://twitter.com/jo_hardin47)|["reticulate: running Python within RStudio
-"]()|
+||[Jo Hardin](https://twitter.com/jo_hardin47)|["reticulate: running Python within RStudio"]()|
 |09/09/2019|[Jesse Sadler](https://twitter.com/vivalosburros?lang=en)|["Creating custom vector classes with the vctrs package"]()|
 ||[Sylvia Tran](https://www.linkedin.com/in/sylvia-s-tran/)|["Python for R Users"](https://docs.google.com/presentation/d/1viS7XP9sjCEdwIv_kuYtDXiO1EobV38MwWKhetpfE20/edit#slide=id.g628ff90219_0_568)|
 |08/12/2019|[Donna Wrublewski](https://twitter.com/caltechchemlib?lang=en)|["Teaching ggplot2 with the Periodic Table"](https://caltechlibrary.github.io/R-Deep-Dive-ggplot2/)|
