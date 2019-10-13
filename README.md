@@ -6,7 +6,7 @@ Slides and other materials from presentations at the LA East R User Meetup
 
 |Dates|Speakers|Topics|
 |:-|:-|:-|
-|10/14/2019|[Charlotte Deng]|["A gentle Introduction Using R for Deep Learning"](2019-10-14-deeplearning/)|
+|10/14/2019|[Charlotte Deng](https://www.linkedin.com/in/huiyu-deng-a020745a)|["A gentle Introduction Using R for Deep Learning"](2019-10-14-deeplearning/)|
 ||[Jo Hardin](https://twitter.com/jo_hardin47)|["reticulate: running Python within RStudio
 "]()|
 |09/09/2019|[Jesse Sadler](https://twitter.com/vivalosburros?lang=en)|["Creating custom vector classes with the vctrs package"]()|
