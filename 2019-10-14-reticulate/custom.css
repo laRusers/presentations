@@ -1,0 +1,15 @@
+/* custom.css */
+.left-code {
+    color: #777;
+      width: 35%;
+    height: 92%;
+    float: left;
+  }
+.right-plot {
+  width: 64%;
+  float: right;
+  padding-left: 1%;
+}
+.remark-code, .remark-inline-code { font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace;
+                                    font-size: 80%;
+                                  }

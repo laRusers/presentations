@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>reticulate:</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jo Hardin" />
+    <meta name="date" content="2019-10-14" />
+    <link href="reticulate_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: right, top, my-title, title-slide
+
+# <code>reticulate</code>:
+## running Python within RStudio
+### Jo Hardin
+### October 14, 2019
+
+---
+
+
+
+
+## Just say Yes! -- https://teachdatascience.com/
+
+&lt;img src="teachDS.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Teach Data Science: `reticulate`
+
+&lt;img src="teachreticulate.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## What is `reticulate`??
+
+(much of the talk taken from: https://rstudio.github.io/reticulate/)
+
+&lt;img src="rstudiopython.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Connect to Python within RStudio
+
+For many statisticians, the go-to software language is R.  However, there is no doubt that Python is a very important language in data science.  Why not do both??
+
+
+```r
+library(reticulate)
+use_virtualenv("r-reticulate")
+import("statsmodels")
+```
+
+```
+## Module(statsmodels)
+```
+
+---
+
+## I can run Python inside R??
+&lt;img src="pychunk1.png" width="65%" style="display: block; margin: auto auto auto 0;" /&gt;
+&lt;img src="pychunk2.png" width="65%" style="display: block; margin: auto 0 auto auto;" /&gt;
+
+
+---
+
+## Python in R
+
+* `pandas` for data wrangling.  
+* In R, the chunk is specified to be a Python chunk (RStudio is now running Python). 
+
+
+````
+```{python}
+import pandas
+flights = pandas.read_csv("flights.csv")
+flights = flights[flights["dest"] == "ORD"]
+flights = flights[['carrier', 'dep_delay', 'arr_delay']]
+flights = flights.dropna()
+```
+````
+
+
+A view of the Python chunk which is actually run:
+
+
+```python
+import pandas
+flights = pandas.read_csv("flights.csv")
+flights = flights[flights["dest"] == "ORD"]
+flights = flights[['carrier', 'dep_delay', 'arr_delay']]
+flights = flights.dropna()
+```
+
+---
+
+## Learn about the dataset
+
+.left-code[
+````
+```{python}
+flights.shape
+flights.head(3)
+flights.describe()
+```
+````
+]
+
+.right-plot[
+
+```python
+flights.shape
+```
+
+```
+## (12590, 3)
+```
+
+```python
+flights.head(3)
+```
+
+```
+##    carrier  dep_delay  arr_delay
+## 4       UA       -4.0       12.0
+## 5       AA       -2.0        8.0
+## 22      AA       -1.0       14.0
+```
+
+```python
+flights.describe()
+```
+
+```
+##           dep_delay     arr_delay
+## count  12590.000000  12590.000000
+## mean      11.709770      2.917951
+## std       39.409704     44.885155
+## min      -20.000000    -62.000000
+## 25%       -6.000000    -22.000000
+## 50%       -2.000000    -10.000000
+## 75%        9.000000     10.000000
+## max      466.000000    448.000000
+```
+]
+
+---
+
+## Computations 
+
+
+````
+```{python}
+flights = pandas.read_csv("flights.csv")
+flights = flights[['carrier', 'dep_delay', 'arr_delay']]
+flights.groupby("carrier").mean()
+```
+````
+
+
+```python
+flights = pandas.read_csv("flights.csv")
+flights = flights[['carrier', 'dep_delay', 'arr_delay']]
+flights.groupby("carrier").mean()
+```
+
+```
+##          dep_delay  arr_delay
+## carrier                      
+## AA        8.586016   0.364291
+## AS        5.804775  -9.930889
+## DL        9.264505   1.644341
+## UA       12.106073   3.558011
+## US        3.782418   2.129595
+```
+
+---
+
+## From Python chunk to R chunk
+
+* &lt;mark&gt;`py$x` &lt;/mark&gt; accesses an `x` variable created within Python from R
+* &lt;mark&gt; `r.x` &lt;/mark&gt; accesses an `x` variable created within R from Python
+
+````
+```{r}
+library(ggplot2)
+ggplot(py$flights, aes(x=carrier, y = arr_delay)) + 
+  geom_point() + geom_jitter()
+```
+````
+---
+
+## From Python chunk to R chunk
+
+* `py$x` accesses an `x` variable created within Python from R
+* `r.x` accesses an `x` variable created within R from Python
+
+.left-code[
+
+```r
+library(ggplot2)
+ggplot(py$flights, 
+       aes(x=carrier, 
+           y=arr_delay)) + 
+  geom_point() + 
+  geom_jitter()
+```
+]
+
+.right-plot[
+![](reticulate_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## From R chunk to Python chunk
+
+
+```r
+data(diamonds)
+head(diamonds)
+```
+
+```
+## # A tibble: 6 x 10
+##   carat cut       color clarity depth table price     x     y     z
+##   &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+## 2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+## 3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+## 4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+## 5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+## 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+```
+
+---
+
+##  A Python chunk
+
+
+```python
+print(r.diamonds.describe())
+```
+
+```
+##               carat         depth  ...             y             z
+## count  53940.000000  53940.000000  ...  53940.000000  53940.000000
+## mean       0.797940     61.749405  ...      5.734526      3.538734
+## std        0.474011      1.432621  ...      1.142135      0.705699
+## min        0.200000     43.000000  ...      0.000000      0.000000
+## 25%        0.400000     61.000000  ...      4.720000      2.910000
+## 50%        0.700000     61.800000  ...      5.710000      3.530000
+## 75%        1.040000     62.500000  ...      6.540000      4.040000
+## max        5.010000     79.000000  ...     58.900000     31.800000
+## 
+## [8 rows x 7 columns]
+```
+---
+
+## A Python chunk
+
+
+```python
+import statsmodels.formula.api as smf
+model = smf.ols('price ~ carat', data = r.diamonds).fit()
+print(model.summary())
+```
+
+```
+##                             OLS Regression Results                            
+## ==============================================================================
+## Dep. Variable:                  price   R-squared:                       0.849
+## Model:                            OLS   Adj. R-squared:                  0.849
+## Method:                 Least Squares   F-statistic:                 3.041e+05
+## Date:                Mon, 14 Oct 2019   Prob (F-statistic):               0.00
+## Time:                        09:01:15   Log-Likelihood:            -4.7273e+05
+## No. Observations:               53940   AIC:                         9.455e+05
+## Df Residuals:                   53938   BIC:                         9.455e+05
+## Df Model:                           1                                         
+## Covariance Type:            nonrobust                                         
+## ==============================================================================
+##                  coef    std err          t      P&gt;|t|      [0.025      0.975]
+## ------------------------------------------------------------------------------
+## Intercept  -2256.3606     13.055   -172.830      0.000   -2281.949   -2230.772
+## carat       7756.4256     14.067    551.408      0.000    7728.855    7783.996
+## ==============================================================================
+## Omnibus:                    14025.341   Durbin-Watson:                   0.986
+## Prob(Omnibus):                  0.000   Jarque-Bera (JB):           153030.525
+## Skew:                           0.939   Prob(JB):                         0.00
+## Kurtosis:                      11.035   Cond. No.                         3.65
+## ==============================================================================
+## 
+## Warnings:
+## [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+```
+
+---
+
+## Bells and whistles
+
+.left-column[
+* autocomplete
+
+* Python script
+]
+
+.right-column[
+&lt;img src="PyScript.png" width="120%" /&gt;
+
+]
+
+
+---
+
+## Importing Python modules
+
+`import()` will import any Python module and call it from R.  [The `os` module provides functionality for navigating the operating system.]
+
+
+```r
+os &lt;- import("os")
+os$listdir(".")
+```
+
+```
+##  [1] ".Rhistory"             "reticulate_files"     
+##  [3] "rstudiopython.png"     "reticulatePyScript.py"
+##  [5] ".DS_Store"             "teachDS.png"          
+##  [7] "teachreticulate.png"   "PyScript.png"         
+##  [9] "custom.css"            "pychunk2.png"         
+## [11] "ST47Scopy.png"         "reticulate_cache"     
+## [13] "pychunk1.png"          "flights.csv"          
+## [15] "reticulate.Rmd"        "reticulate.html"
+```
+
+---
+
+## Full disclosure
+
+* Python versions (@#$%#$%@#$  ????)
+
+* module versions (@%#$%@#$%#$ ????)
+
+---
+
+## Learn more
+
+- [RStudio R Interface to Python](https://rstudio.github.io/reticulate/)
+
+https://rstudio.github.io/reticulate/  
+
+- [RStudio blog on Reticulated Python](https://blog.rstudio.com/2018/10/09/rstudio-1-2-preview-reticulated-python/)  
+
+https://blog.rstudio.com/2018/10/09/rstudio-1-2-preview-reticulated-python
+
+
+---
+
+## Thank you!
+
+* `jo.hardin@pomona.edu`
+
+* `@jo_hardin47`
+
+* https://github.com/hardin47
+
+* http://research.pomona.edu/johardin/
+
+.pull-right[
+&lt;img src="ST47Scopy.png" width="85%" /&gt;
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightlines": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
