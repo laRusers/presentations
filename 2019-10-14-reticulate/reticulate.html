@@ -266,6 +266,14 @@ print(r.diamonds.describe())
 ```python
 import statsmodels.formula.api as smf
 model = smf.ols('price ~ carat', data = r.diamonds).fit()
+```
+
+```
+## C:\PROGRA~3\ANACON~1\lib\site-packages\statsmodels\compat\pandas.py:49: FutureWarning: The Panel class is removed from pandas. Accessing it from the top-level namespace will also be removed in the next version
+##   data_klasses = (pandas.Series, pandas.DataFrame, pandas.Panel)
+```
+
+```python
 print(model.summary())
 ```
 
@@ -276,7 +284,7 @@ print(model.summary())
 ## Model:                            OLS   Adj. R-squared:                  0.849
 ## Method:                 Least Squares   F-statistic:                 3.041e+05
 ## Date:                Mon, 14 Oct 2019   Prob (F-statistic):               0.00
-## Time:                        09:01:15   Log-Likelihood:            -4.7273e+05
+## Time:                        10:14:32   Log-Likelihood:            -4.7273e+05
 ## No. Observations:               53940   AIC:                         9.455e+05
 ## Df Residuals:                   53938   BIC:                         9.455e+05
 ## Df Model:                           1                                         
@@ -326,14 +334,13 @@ os$listdir(".")
 ```
 
 ```
-##  [1] ".Rhistory"             "reticulate_files"     
-##  [3] "rstudiopython.png"     "reticulatePyScript.py"
-##  [5] ".DS_Store"             "teachDS.png"          
-##  [7] "teachreticulate.png"   "PyScript.png"         
-##  [9] "custom.css"            "pychunk2.png"         
-## [11] "ST47Scopy.png"         "reticulate_cache"     
-## [13] "pychunk1.png"          "flights.csv"          
-## [15] "reticulate.Rmd"        "reticulate.html"
+##  [1] "custom.css"            "flights.csv"          
+##  [3] "pychunk1.png"          "pychunk2.png"         
+##  [5] "PyScript.png"          "reticulate.html"      
+##  [7] "reticulate.Rmd"        "reticulatePyScript.py"
+##  [9] "reticulate_files"      "rstudiopython.png"    
+## [11] "ST47Scopy.png"         "teachDS.png"          
+## [13] "teachreticulate.png"
 ```
 
 ---
