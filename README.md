@@ -1,6 +1,28 @@
-# LA East R Users Presentations <img src="https://github.com/laeRusers/logos/blob/master/laerug_hexsticker.png" align="right" width="120" />
+<h1 style="font-weight:normal" align="center">
+  <a href="https://socalr.org/">
+    <img src=https://github.com/laeRusers/logos/blob/master/laerug_hexsticker.png alt="laeRusers" align="right" width="120">
+  </a>
+  &nbsp;LA East R Users Presentations&nbsp;
+</h1>
+
+<div align="center">
+
+[Twitter][Twitter] :speech_balloon:&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[LinkedIn][LinkedIn] :necktie:&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[GitHub :octocat:][GitHub]&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Website][Website] :link:&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Meetup][Meetup] :date:
+
+</div>
+
+<!--
+Quick Link 
+-->
+
+[Twitter]:https://twitter.com/zhiiiyang
+[LinkedIn]:https://www.linkedin.com/company/los-angeles-r-users-group/
+[GitHub]:https://github.com/laRusers
+[Website]:https://socalr.org/
+[Meetup]:https://meetup.com/Los-Angeles-R-Users-Group-Data-Science
 
 Slides and other materials from presentations at the LA East R User Meetup
+
 
 # 2019
 
