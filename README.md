@@ -18,7 +18,7 @@ Slides and other materials from presentations at the LA East R User Meetup
 Quick Link 
 -->
 
-[Twitter]:https://twitter.com/zhiiiyang
+[Twitter]:https://twitter.com/la_Rusers
 [LinkedIn]:https://www.linkedin.com/company/los-angeles-r-users-group/
 [GitHub]:https://github.com/laRusers
 [Website]:https://socalr.org/
