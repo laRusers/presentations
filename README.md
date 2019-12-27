@@ -1,4 +1,4 @@
-<h1 style="font-weight:normal" align="center">
+<h1 style="font-weight:normal" align="left">
   <a href="https://socalr.org/">
     <img src=https://github.com/laeRusers/logos/blob/master/laerug_hexsticker.png alt="laeRusers" align="right" width="120">
   </a>
@@ -6,7 +6,7 @@
   
 </h1>
 
-<div align="center">
+<div align="left">
 
 [Twitter][Twitter] :speech_balloon:&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[LinkedIn][LinkedIn] :necktie:&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[GitHub :octocat:][GitHub]&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Website][Website] :link:&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Meetup][Meetup] :date:
 
