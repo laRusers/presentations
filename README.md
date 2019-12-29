@@ -34,7 +34,7 @@ Quick Link
 ||[Amy Tzu-Yu Chen](https://www.linkedin.com/in/amy17519/)|["Data Science Reporting: Tips and Tricks for useRs"]()|
 |10/14/2019|[Charlotte Deng](https://www.linkedin.com/in/huiyu-deng-a020745a)|["A gentle Introduction Using R for Deep Learning"](2019-10-14-deeplearning/)|
 ||[Jo Hardin](https://twitter.com/jo_hardin47)|["reticulate: running Python within RStudio"](2019-10-14-reticulate/reticulate.pdf)|
-|09/09/2019|[Jesse Sadler](https://twitter.com/vivalosburros?lang=en)|["Creating custom vector classes with the vctrs package"]()|
+|09/09/2019|[Jesse Sadler](https://twitter.com/vivalosburros?lang=en)|["Creating custom vector classes with the vctrs package"](https://github.com/laRusers/presentations/blob/master/2019-09-09_vctrs/Sadler-custom-classes-with-vctrs_1.pdf)|
 ||[Sylvia Tran](https://www.linkedin.com/in/sylvia-s-tran/)|["Python for R Users"](https://docs.google.com/presentation/d/1viS7XP9sjCEdwIv_kuYtDXiO1EobV38MwWKhetpfE20/edit#slide=id.g628ff90219_0_568)|
 |08/12/2019|[Donna Wrublewski](https://twitter.com/caltechchemlib?lang=en)|["Teaching ggplot2 with the Periodic Table"](https://caltechlibrary.github.io/R-Deep-Dive-ggplot2/)|
 ||[Malcolm Barrett](https://twitter.com/malco_barrett?lang=en)|["The YAML problem: Writing and working with YAML with ymlthis"](https://github.com/malcolmbarrett/ymlthis_talk)|
