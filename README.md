@@ -31,7 +31,7 @@ Quick Link
 |Dates|Speakers|Topics|
 |:-|:-|:-|
 |12/09/2019|[Nellie Ponarul](https://www.linkedin.com/in/nellie-ponarul-31944aa0/)|["Web Applications: From HTML/JavaScript/CSS to Shiny"]()|
-||[Amy Tzu-Yu Chen](https://www.linkedin.com/in/amy17519/)|["Data Science Reporting: Tips and Tricks for useRs"]()|
+||[Amy Tzu-Yu Chen](https://www.linkedin.com/in/amy17519/)|["Data Science Reporting: Tips and Tricks for useRs"](https://github.com/laRusers/presentations/blob/master/2019-12-09-shiny-ds-report/amy-chen-ds-report.pdf)|
 |10/14/2019|[Charlotte Deng](https://www.linkedin.com/in/huiyu-deng-a020745a)|["A gentle Introduction Using R for Deep Learning"](2019-10-14-deeplearning/)|
 ||[Jo Hardin](https://twitter.com/jo_hardin47)|["reticulate: running Python within RStudio"](2019-10-14-reticulate/reticulate.pdf)|
 |09/09/2019|[Jesse Sadler](https://twitter.com/vivalosburros?lang=en)|["Creating custom vector classes with the vctrs package"](https://github.com/laRusers/presentations/blob/master/2019-09-09_vctrs/Sadler-custom-classes-with-vctrs_1.pdf)|
