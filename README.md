@@ -30,7 +30,7 @@ Quick Link
 
 |Dates|Speakers|Topics|
 |:-|:-|:-|
-|12/09/2019|[Nellie Ponarul](https://www.linkedin.com/in/nellie-ponarul-31944aa0/)|["Web Applications: From HTML/JavaScript/CSS to Shiny"]()|
+|12/09/2019|[Nellie Ponarul](https://www.linkedin.com/in/nellie-ponarul-31944aa0/)|["Web Applications: From HTML/JavaScript/CSS to Shiny"](https://drive.google.com/open?id=0BwshPEcPrR80bWlTT1h0d0d4Y3l0azAwdjBxRzE1NWt6UHZN)|
 ||[Amy Tzu-Yu Chen](https://www.linkedin.com/in/amy17519/)|["Data Science Reporting: Tips and Tricks for useRs"](https://github.com/laRusers/presentations/blob/master/2019-12-09-shiny-ds-report/amy-chen-ds-report.pdf)|
 |10/14/2019|[Charlotte Deng](https://www.linkedin.com/in/huiyu-deng-a020745a)|["A gentle Introduction Using R for Deep Learning"](2019-10-14-deeplearning/)|
 ||[Jo Hardin](https://twitter.com/jo_hardin47)|["reticulate: running Python within RStudio"](2019-10-14-reticulate/reticulate.pdf)|
