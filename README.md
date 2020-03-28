@@ -74,6 +74,8 @@ Slides and other materials from presentations at the LA West R User Meetup
 
 |Dates|Speakers|Topics|Video|
 |:-|:-|:-|:-|
+|[03/19/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/268961265/)|[Jesse Sadler](https://twitter.com/vivalosburros?lang=en)|[vctrs: Creating custom vector classes with the vctrs package](https://www.jessesadler.com/slides/RStudio2020.pdf)|[Video](https://www.youtube.com/watch?v=nN_7zuil9ks)|
+||[Emad Hasan](https://www.linkedin.com/in/emadhasan/)|[Starter Guide to R Plumber + Slack](https://medium.com/@ehx/starter-guide-to-r-plumber-slack-a-detailed-walkthrough-b773056d243a)||
 |[10/24/2019](https://github.com/laRusers/presentations/blob/master/2019-10-24-ucla-stack-datares/LAWRUG%20Oct%2024%2C%202019.pdf)|[Jeanette Lin & Keith Atienza, The Stack](https://stack.dailybruin.com/)|[To Stick or To Switch: Student Major Changes at UCLA](https://stack.dailybruin.com/2019/05/21/change-major/)||
 ||[Nikhil Sharma & Raghava Govil, Datares](https://datares.github.io/)|[Analyzing Denzel Curry’s Lyrics Through Text Mining](https://github.com/laRusers/presentations/blob/master/2019-10-24-ucla-stack-datares/02-dataresPresentation.pdf)||
 |[09/26/2019](https://github.com/laRusers/presentations/blob/master/2019-09-26-purrr/LAWRUG%20-%20Sep%2026%2C%202019.pdf)|[Malcolm Barrett](https://malco.io)|[Functional programming with purrr](https://lar-purrr.netlify.com/)||
