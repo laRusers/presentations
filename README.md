@@ -77,7 +77,6 @@ Slides and other materials from presentations at the LA West R User Meetup
 |[04/23/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/270120172/)|[Donna Wrublewski](https://www.library.caltech.edu/person/donna-wrublewski)|[Creating an R workshop experience during the ACS National Meeting](https://tinyurl.com/2020-04-23-dw-larug)|[Video](https://youtu.be/dFA4qsJuIVs)|
 ||[Keren Xu](https://twitter.com/kerenxuepi)|[Draw fractals from root finding iteration in R](https://xukeren.rbind.io/slides/20200423/slides#1)|[Video](https://youtu.be/dFA4qsJuIVs)|
 ||[Luke Morris](https://lukesmorris.com)|[Bracketball: Let's Explore March Madness with ncaahoopR](https://docs.google.com/presentation/d/1F9TTfK1_zRlzdvw4UCseaAXh-NQch4oy6zB3zXMamiY/edit?usp=sharing)|[Video](https://www.youtube.com/watch?v=nN_7zuil9ks)|
-
 |[03/19/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/268961265/)|[Jesse Sadler](https://twitter.com/vivalosburros?lang=en)|[vctrs: Creating custom vector classes with the vctrs package](https://www.jessesadler.com/slides/RStudio2020.pdf)|[Video](https://www.youtube.com/watch?v=nN_7zuil9ks)|
 ||[Emad Hasan](https://www.linkedin.com/in/emadhasan/)|[Starter Guide to R Plumber + Slack](https://medium.com/@ehx/starter-guide-to-r-plumber-slack-a-detailed-walkthrough-b773056d243a)|[Video](https://www.youtube.com/watch?v=nN_7zuil9ks)|
 
