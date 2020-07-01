@@ -1,3 +1,22 @@
+# LA R Users Presentations - Virtual <img src="https://github.com/laRusers/logos/blob/master/larusers_hex_general.png" align="right" width="120" />
+
+Slides and other materials from presentations at the LA R User Virtual Meetup
+
+# 2020
+
+|Dates|Speakers|Topics|Video|
+|:-|:-|:-|:-|
+|[06/30/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/271228242/)|[Julia Silge](https://twitter.com/juliasilge)|[Three Reasons to Use tidymodels](https://juliasilge.github.io/la-rug)|[Video](https://www.youtube.com/watch?v=D3vDNbgG0DQ)|
+|[05/27/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/270532283/)|[Rich Iannone](https://twitter.com/riannone)|[Making Tables with the gt Package](https://github.com/laRusers/presentations/blob/master/2020-05-27-rich-avik/gt_talk_la_r_users-rich_i.pdf)|[Video](https://youtu.be/SKWcNo_IWQk)|
+||[Avik Das](https://www.linkedin.com/in/avikdas1990/)|[Dynamic programming for machine learning: Hidden Markov Models](https://docs.google.com/presentation/d/1YBH3LOXNCKFqYtFSOomo1UuWMoqZcHWaevA8aLoCKCU/edit?usp=sharing)|[Video](https://youtu.be/SKWcNo_IWQk)|
+|[04/23/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/270120172/)|[Donna Wrublewski](https://www.library.caltech.edu/person/donna-wrublewski)|[Creating an R workshop experience during the ACS National Meeting](https://tinyurl.com/2020-04-23-dw-larug)|[Video](https://youtu.be/dFA4qsJuIVs)|
+||[Keren Xu](https://twitter.com/kerenxuepi)|[Draw fractals from root finding iteration in R](https://xukeren.rbind.io/slides/20200423/slides#1)|[Video](https://youtu.be/dFA4qsJuIVs)|
+||[Luke Morris](https://lukesmorris.com)|[Bracketball: Let's Explore March Madness with ncaahoopR](https://docs.google.com/presentation/d/1F9TTfK1_zRlzdvw4UCseaAXh-NQch4oy6zB3zXMamiY/edit?usp=sharing)|[Video](https://www.youtube.com/watch?v=nN_7zuil9ks)|
+|[03/19/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/268961265/)|[Jesse Sadler](https://twitter.com/vivalosburros?lang=en)|[vctrs: Creating custom vector classes with the vctrs package](https://www.jessesadler.com/slides/RStudio2020.pdf)|[Video](https://www.youtube.com/watch?v=nN_7zuil9ks)|
+||[Emad Hasan](https://www.linkedin.com/in/emadhasan/)|[Starter Guide to R Plumber + Slack](https://medium.com/@ehx/starter-guide-to-r-plumber-slack-a-detailed-walkthrough-b773056d243a)|[Video](https://www.youtube.com/watch?v=nN_7zuil9ks)|
+
+
+
 <h1 style="font-weight:normal" align="left">
   <a href="https://socalr.org/">
     <img src=https://github.com/laeRusers/logos/blob/master/laerug_hexsticker.png alt="laeRusers" align="right" width="120">
@@ -69,21 +88,6 @@ Quick Link
 # LA West R Users Presentations <img src="https://github.com/laRusers/logos/blob/master/lawrug_hex.png" align="right" width="120" />
 
 Slides and other materials from presentations at the LA West R User Meetup
-
-# 2020
-
-|Dates|Speakers|Topics|Video|
-|:-|:-|:-|:-|
-|[06/30/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/271228242/)|[Julia Silge](https://twitter.com/juliasilge)|[Three Reasons to Use tidymodels](https://juliasilge.github.io/la-rug)|[Video](https://www.youtube.com/watch?v=D3vDNbgG0DQ)|
-|[05/27/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/270532283/)|[Rich Iannone](https://twitter.com/riannone)|[Making Tables with the gt Package](https://github.com/laRusers/presentations/blob/master/2020-05-27-rich-avik/gt_talk_la_r_users-rich_i.pdf)|[Video](https://youtu.be/SKWcNo_IWQk)|
-||[Avik Das](https://www.linkedin.com/in/avikdas1990/)|[Dynamic programming for machine learning: Hidden Markov Models](https://docs.google.com/presentation/d/1YBH3LOXNCKFqYtFSOomo1UuWMoqZcHWaevA8aLoCKCU/edit?usp=sharing)|[Video](https://youtu.be/SKWcNo_IWQk)|
-|[04/23/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/270120172/)|[Donna Wrublewski](https://www.library.caltech.edu/person/donna-wrublewski)|[Creating an R workshop experience during the ACS National Meeting](https://tinyurl.com/2020-04-23-dw-larug)|[Video](https://youtu.be/dFA4qsJuIVs)|
-||[Keren Xu](https://twitter.com/kerenxuepi)|[Draw fractals from root finding iteration in R](https://xukeren.rbind.io/slides/20200423/slides#1)|[Video](https://youtu.be/dFA4qsJuIVs)|
-||[Luke Morris](https://lukesmorris.com)|[Bracketball: Let's Explore March Madness with ncaahoopR](https://docs.google.com/presentation/d/1F9TTfK1_zRlzdvw4UCseaAXh-NQch4oy6zB3zXMamiY/edit?usp=sharing)|[Video](https://www.youtube.com/watch?v=nN_7zuil9ks)|
-|[03/19/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/268961265/)|[Jesse Sadler](https://twitter.com/vivalosburros?lang=en)|[vctrs: Creating custom vector classes with the vctrs package](https://www.jessesadler.com/slides/RStudio2020.pdf)|[Video](https://www.youtube.com/watch?v=nN_7zuil9ks)|
-||[Emad Hasan](https://www.linkedin.com/in/emadhasan/)|[Starter Guide to R Plumber + Slack](https://medium.com/@ehx/starter-guide-to-r-plumber-slack-a-detailed-walkthrough-b773056d243a)|[Video](https://www.youtube.com/watch?v=nN_7zuil9ks)|
-
-
 
 # 2019
 
