@@ -74,6 +74,7 @@ Slides and other materials from presentations at the LA West R User Meetup
 
 |Dates|Speakers|Topics|Video|
 |:-|:-|:-|:-|
+|[06/30/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/271228242/)|[Julia Silge](https://twitter.com/juliasilge)|[Three Reasons to Use tidymodels](https://juliasilge.github.io/la-rug)|[Video](https://www.youtube.com/watch?v=D3vDNbgG0DQ)|
 |[05/27/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/270532283/)|[Rich Iannone](https://twitter.com/riannone)|[Making Tables with the gt Package](https://github.com/laRusers/presentations/blob/master/2020-05-27-rich-avik/gt_talk_la_r_users-rich_i.pdf)|[Video](https://youtu.be/SKWcNo_IWQk)|
 ||[Avik Das](https://www.linkedin.com/in/avikdas1990/)|[Dynamic programming for machine learning: Hidden Markov Models](https://docs.google.com/presentation/d/1YBH3LOXNCKFqYtFSOomo1UuWMoqZcHWaevA8aLoCKCU/edit?usp=sharing)|[Video](https://youtu.be/SKWcNo_IWQk)|
 |[04/23/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/270120172/)|[Donna Wrublewski](https://www.library.caltech.edu/person/donna-wrublewski)|[Creating an R workshop experience during the ACS National Meeting](https://tinyurl.com/2020-04-23-dw-larug)|[Video](https://youtu.be/dFA4qsJuIVs)|
