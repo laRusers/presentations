@@ -6,6 +6,7 @@ Slides and other materials from presentations at the LA R User Virtual Meetup
 
 |Dates|Speakers|Topics|Video|Code|
 |:-|:-|:-|:-|:-|
+|[10/27/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/274061890/)|[Will Landau](https://wlandau.github.io/)|[Reproducible computation at scale in R with targets](https://wlandau.github.io/larug2020)|[Video](https://www.youtube.com/watch?v=Qq25BUxpJu4)||
 |[09/22/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/272772319/)|[Edward Visel](https://alistaire.rbind.io/)|[Bigger but local: Tools for uncomfortably big data](https://t.co/epP6ho3xjz?amp=1)|[Video](https://www.youtube.com/watch?v=6xg8S8GV8y0)|[Code Sample](https://gist.github.com/alistaire47/cc07c31bb18d25c7af70327eab60a245)|
 |[08/18/2020](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/272520372/)|[Adam Austin](https://twitter.com/just_add_data)|[Dissecting a Function: Profiling and Benchmarking Your Way to Faster Code](https://github.com/laRusers/presentations/blob/master/2020-08-18-benchmark-profiling-base-r-features/profiling-benchmarking-adam-austin.pdf)|[Video](https://www.youtube.com/watch?v=yx-8ng7MuLM)|
 ||[Karolis Koncevičius](http://karolis.koncevicius.lt)|[Non-exhaustive list of lesser used base R features](https://github.com/laRusers/presentations/blob/master/2020-08-18-benchmark-profiling-base-r-features/Non-exhaustive%20list%20of%20lesser%20used%20base%20R%20features.pdf)|[Video](https://www.youtube.com/watch?v=yx-8ng7MuLM)|
