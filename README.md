@@ -2,6 +2,12 @@
 
 Slides and other materials from presentations at the LA R User Virtual Meetup
 
+# 2021
+
+|Dates|Speakers|Topics|Video|Code|
+|:-|:-|:-|:-|:-|
+|[02/23/2021](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/276258293/)|[Hossein Falaki](http://www.falaki.net/)|[Unified Data Applications with Shiny on Delta Lakes]()|[Video](https://www.youtube.com/watch?v=QUHcwwYB3-o)||
+
 # 2020
 
 |Dates|Speakers|Topics|Video|Code|
