@@ -6,7 +6,7 @@ Slides and other materials from presentations at the LA R User Virtual Meetup
 
 |Dates|Speakers|Topics|Video|Code|
 |:-|:-|:-|:-|:-|
-|[03/24/2021](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/276724295/)|[James Lamb](https://github.com/jameslamb)|[R from the Command Line](https://github.com/jameslamb/talks/tree/main/r-from-the-command-line)|[Video](https://www.youtube.com/watch?v=5kmUE-qHziA)|
+|[03/24/2021](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/276724295/)|[James Lamb](https://github.com/jameslamb)|[R from the Command Line](https://github.com/jameslamb/talks/tree/main/r-from-the-command-line)|[Video](https://www.youtube.com/watch?v=5kmUE-qHziA)|[Code](https://github.com/jameslamb/talks/tree/main/r-from-the-command-line)
 ||[Neal Fultz](https://github.com/nfultz)|[TBPosted]()|[Video](https://www.youtube.com/watch?v=5kmUE-qHziA)|
 |[02/23/2021](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/276258293/)|[Hossein Falaki](http://www.falaki.net/)|[Unified Data Applications with Shiny on Delta Lakes](https://github.com/laRusers/presentations/blob/master/2021-02-23-shiny-delta-lake-databricks/Shiny_Lakehouse.pdf)|[Video](https://www.youtube.com/watch?v=QUHcwwYB3-o)||
 
