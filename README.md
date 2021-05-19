@@ -6,6 +6,7 @@ Slides and other materials from presentations at the LA R User Virtual Meetup
 
 |Dates|Speakers|Topics|Video|Code|
 |:-|:-|:-|:-|:-|
+|[05/18/2021](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/278113310/)|[Max Kuhn](https://github.com/topepo)|[Creating model en mass with workflowsets](https://github.com/topepo/2021-LA-RUG)|[Video](https://www.youtube.com/watch?v=2OfTEakSFXQ)||
 |[04/27/2021](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/276977363/)|[Emily Riederer](https://emilyriederer.netlify.app/)|[Column Names as Contracts](https://github.com/ocrug/presentations/blob/master/2021-04-27_Column_Names_as_Contracts/Column_Names_as_Contracts.pdf)|[Video](https://youtu.be/9lEdHju2qgw)||
 |[03/24/2021](https://www.meetup.com/Los-Angeles-R-Users-Group-Data-Science/events/276724295/)|[James Lamb](https://github.com/jameslamb)|[R from the Command Line](https://github.com/jameslamb/talks/tree/main/r-from-the-command-line)|[Video](https://www.youtube.com/watch?v=5kmUE-qHziA)|[Code](https://github.com/jameslamb/talks/tree/main/r-from-the-command-line)
 ||[Neal Fultz](https://github.com/nfultz)|[R in the Terminal - Survival Strategies](https://docs.google.com/presentation/d/1YC5hzjYMwrENN2gq2i-FxnLjrBZP0uOdtutey_kXxW0/)|[Video](https://www.youtube.com/watch?v=5kmUE-qHziA)|
